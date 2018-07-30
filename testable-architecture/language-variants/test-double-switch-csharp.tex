@@ -1,0 +1,12 @@
+\begin{verbatim}
+    private static IStatsService CreateStatsService()
+    {
+        if (System.Environment.GetEnvironmentVariable("FAKE_INITIALISATION_DATA") != null)
+        {
+            return new FakeStatsService(
+                System.Environment.GetEnvironmentVariable("FAKE_INITIALISATION_DATA"));
+        }
+    
+        return new ProductionStatsService(new ShoutyStatsService());
+    }
+\end{verbatim}

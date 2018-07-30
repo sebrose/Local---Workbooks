@@ -1,0 +1,111 @@
+\documentclass[a4paper,12pt]{report} 
+
+\usepackage{cucumber-workbook}
+\usepackage{upquote}
+
+
+\title{Testable\\Architecture}
+
+\newcommand{\coverImage}{testable-architecture/images/cover.jpg}
+
+\newcommand{\CucumberWorkbookVersion}{4.1.3}
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one target audience
+
+\newcommand{\targetAudience}{Delegate}
+%\newcommand{\targetAudience}{Trainer}
+%
+% If you need conditional content based on this variable,
+% check cucumber-workbook.sty for commands using \TARGETAUDIENCE
+%-------------------------------------------------------
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one language
+
+%\newcommand{\workbookLanguage}{Java}
+\newcommand{\workbookLanguage}{C\char`\#}
+%\newcommand{\workbookLanguage}{C++}
+
+%
+% If you need conditional content based on this variable,
+% check cucumber-workbook.sty for commands using \LANGUAGE
+%-------------------------------------------------------
+
+%-------------------------------------------------------
+% What flavour of workbook should be produced?
+% Uncomment ONLY one flavour
+
+\newcommand{\workbookFlavour}{Standard}
+
+%
+% If you need conditional content based on this variable,
+% check cucumber-workbook.sty for commands using \FLAVOUR
+%-------------------------------------------------------
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one platform
+
+\newcommand{\targetPlatform}{}
+
+%
+% If you need conditional content based on this variable,
+% check cucumber-workbook.sty for commands using \TARGETPLATFORM
+%-------------------------------------------------------
+
+\newcommand{\ShoutyStatsService}{\NOTCPP{ShoutyStatsService}\CPP{shouty_stats_service}}
+\newcommand{\ShoutyStatsServiceException}{\NOTCPP{ShoutyStatsServiceException}\CPP{shouty_stats_service_exception}}
+\newcommand{\EcoStatsService}{\NOTCPP{EcoStatsService}\CPP{eco_stats_service}}
+\newcommand{\ShoutyReportProcessor}{\NOTCPP{ShoutyReportProcessor}\CPP{shouty_report_processor}}
+\newcommand{\ShoutyReportJob}{\NOTCPP{ShoutyReportJob}\CPP{shouty_report_job}}
+\newcommand{\RevenueProviderInterface}{\CSHARP{IRevenueProvider}\JAVA{RevenueProvider}\CPP{revenue_provider}}
+\newcommand{\ProductionRevenueProvider}{\NOTCPP{ProductionRevenueProvider}\CPP{production_revenue_provider}}
+\newcommand{\FakeRevenueProvider}{\NOTCPP{FakeRevenueProvider}\CPP{fake_revenue_provider}}
+\newcommand{\RevenueProviderContractTests}{\NOTCPP{RevenueProviderContract}\CPP{revenue_provider.contract.cpp}}
+\newcommand{\ProductionRevenueProviderContractTests}{\JAVA{ProductionRevenueProviderContractTests}\CSHARP{ProductionRevenueProviderContractTests}\CPP{production_revenue_provider.contract.tests.cpp}}
+\newcommand{\FakeRevenueProviderContractTests}{\JAVA{FakeRevenueProviderContractTests}\CSHARP{FakeRevenueProviderContractTests}\CPP{fake_revenue_provider.contract.tests.cpp}}
+\newcommand{\MileageClaim}{\NOTCPP{MileageClaim}\CPP{mileage_claim}}
+\newcommand{\EcoStat}{\NOTCPP{EcoStat}\CPP{eco_stat}}
+\newcommand{\EndToEndTests}{\NOTCPP{EndToEndTests}\CPP{end_to_end.tests.cpp}}
+\newcommand{\UnitTests}{\NOTCPP{UnitTests}\CPP{unit.tests.cpp}}
+\newcommand{\ContractTests}{\NOTCPP{StatsServiceContractTests}\CPP{contract.tests.cpp}}
+\newcommand{\CustomerRevenue}{\NOTCPP{CustomerRevenue}\CPP{customer_revenue}}
+
+\newcommand{\WriteEcoStatsReportSignature}{\CSHARP{void WriteEcoStatsReport(IList<EcoStat> results)}\JAVA{void writeEcoStatsReport(List<EcoStat> results)}\CPP{void write_eco_stats_report(const list<eco_stat> \& results)}}
+
+\newcommand{\GetRevenueMethod}{\CSHARP{GetRevenue()}\JAVA{getRevenue()}\CPP{get_revenue()}}
+\newcommand{\CreateRevenueProviderMethod}{\NOTCPP{CreateRevenueProvider}\CPP{create_revenue_provider}}
+\newcommand{\WriteEcoStatsReportMethod}{\CSHARP{WriteEcoStatsReport()}\JAVA{writeEcoStatsReport()}\CPP{void write_eco_stats_report()}}
+\newcommand{\ProcessMethod}{\CSHARP{Process()}\JAVA{process()}\CPP{process()}}
+\newcommand{\MainMethod}{\CSHARP{Main()}\JAVA{main()}\CPP{main()}}
+\newcommand{\GetCustomerIDsMethod}{\JAVA{getCustomerIDs}\CSHARP{GetCustomerIDs}\CPP{get_customer_ids}}
+\newcommand{\IsValidCustomerMethod}{\JAVA{isValidCustomer}\CSHARP{IsValidCustomer}\CPP{is_valid_customer}}
+\newcommand{\SetEcoStatsMethod}{\CSHARP{SetEcoStats}\JAVA{setEcoStats}\CPP{set_eco_stats}}
+\newcommand{\GetLatestEcoStatsDateMethod}{\CSHARP{GetLatestEcoStatsDate}\JAVA{getLatestEcoStatsDate}\CPP{get_latest_eco_stats_date}}
+\newcommand{\GetEcoStatsWinnerForMethod}{\CSHARP{GetEcoStatsWinnerFor}\JAVA{getEcoStatsWinnerFor}\CPP{get_eco_stats_winner_for}}
+\newcommand{\GetRevenueProviderMethod}{\CSHARP{GetRevenueProvider}\JAVA{getRevenueProvider}\CPP{get_revenue_provider}}
+
+\newcommand{\revenuePerMileField}{\NOTCPP{revenuePerMile}\CPP{revenue_per_mile}}
+
+
+\begin{document}
+
+\import{./}{cover.tex}
+\import{testable-architecture/}{README.tex}
+\import{testable-architecture/}{overview.tex}
+%\import{testable-architecture/}{bug-or-feature.tex}
+\import{testable-architecture/}{seam.tex}
+\import{testable-architecture/}{contract-tests.tex}
+\import{testable-architecture/}{test-double.tex}
+%\import{testable-architecture/}{new-requirement.tex}
+\import{testable-architecture/}{hexagonal-architecture.tex}
+\import{testable-architecture/}{tidying-up.tex}
+\import{testable-architecture/}{builder-pattern.tex}
+\import{testable-architecture/}{volatile-data.tex}
+\import{testable-architecture/}{another-feature.tex}
+\import{testable-architecture/}{appendix-testing-pyramid.tex}
+\import{testable-architecture/}{appendix-service-spec.tex}
+\end{document}

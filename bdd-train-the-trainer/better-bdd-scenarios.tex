@@ -1,0 +1,63 @@
+\chapter*{Better BDD scenarios}
+
+\ifnotes
+
+\fi
+
+\ifcontent
+    \section*{Review some scenarios}
+    Work in pairs or 3 people mini-groups
+    
+    Identify the good and bad parts of each scenario
+    
+    The following orientation questions can help you with the review
+    
+    \begin{itemize}
+        \item Is it clear what each scenario is describing?
+        \item Are there too many / too few details?
+        \item Does it use a language that everyone understands?
+        \item How likely is it that this scenario will change when the application changes?
+    \end{itemize}
+    
+    \begin{framed}
+        Scenario: Username should be unique
+        
+        \begin{adjustwidth}{1cm}{}
+            Given a user "Marvin" is in the database \\
+            And I navigate to http://myapp.com \\
+            And I click on "Register" \\
+            And I fill in "Username" with "Marvin" \\
+            And I fill in "Password" with "1234" \\
+            When I click on "Submit registration" \\
+            Then "ValidationSummary" should be visible \\
+            And "ValidationSummary" should contain "Username already in use"
+        \end{adjustwidth}
+    \end{framed}
+    
+    \begin{framed}
+        Scenario: Delivery address change
+        
+        \begin{adjustwidth}{1cm}{}
+            Given I have placed an order \\
+            When I change the delivery address \\
+            Then I should receive a confirmation \\
+            And the estimated arrival time should be updated \\
+            And the delivery person should be notified about the new address
+        \end{adjustwidth}
+    \end{framed}
+    
+    \begin{framed}
+        Scenario: Client receives address change notification
+        
+        \begin{adjustwidth}{1cm}{}
+            Given I visit Geek Pizza shop site \\
+            And I browse for "Margarita" pizza \\
+            And I add the pizza to the basket \\
+            And I proceed to checkout \\
+            And I enter delivery address \\ 
+            And I enter payment details \\
+            When I confirm the order \\
+            Then I should receive an order notification
+        \end{adjustwidth}
+    \end{framed}
+\fi

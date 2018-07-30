@@ -1,0 +1,164 @@
+\chapter*{BDD Fundamentals Trainer's guide}
+
+\section*{Overview \& Learning outcomes}
+
+Today is all about the collaborative / process side of BDD. It should also give one-day-only participants an overall feel for the scope of BDD, and what it would mean to adopt it.
+
+The day is very collaborative - lots of exercises. There are no computers. People should sit and work in small groups.
+
+By the end of the day, attendees should understand:
+
+\begin{itemize}
+    \item The high-level view of the BDD process
+    \item The importance of collaborative discovery, conversations, etc.
+    \item The difference between rules and examples
+    \item How to use example mapping to facilitate a discovery workshop
+    \item The Given / When / Then structure for a expressing a scenario
+\end{itemize}
+
+\section*{Preparation}
+
+Trainer will need:
+\begin{itemize}
+    \item Send pre workshop questionnaire
+    \item Questions...
+    \item Cucumber business cards (please contact tracey@cucumber.io to get some ordered)
+    \item Cucumber Stickers
+    \item Post-its (1 pack per 3 attendees)
+    \item Workbooks (1 per attendee + 1 for trainer)
+    \item Sharpies (1 per attendee)
+    \item Ballpoint pens (1 per attendee)
+    \item Pack of 4-coloured (yellow/blue/green/red) 3x5 index cards (1 pack per 3 attendees)
+    \item blu-tack for hanging flipcharts on the wall
+\end{itemize}
+
+\section*{A note about your approach}
+
+In general, when facilitating the review sections, use the focussed conversation method to help guide participants to the right answers. We try to leave those questions out of the workbook.
+
+\section*{Outline}
+
+\begin{itemize}
+    \item Before we get started
+    \item Start with the end in mind
+    \item BDD from 5,000 feet
+    \item Deliberate Discovery
+    \item Who, what and why?
+    \item Making concrete statements
+    \item Tell a story
+    \item Essential details
+    \item Discovery using examples
+    \item Ubiquitous Language
+    \item Rules vs Examples
+    \item Context - Action - Outcome
+    \item Practice: Rule or Example?
+    \item Example Mapping
+    \item Cucumber Demo
+    \item Wrap up
+    \item Gherkin Specifications
+    \item Given / When / Then
+    \item Practice Given / When / Then
+    \item What makes for good Gherkin?
+    \item Gherkin quadrant
+    \item Gherkin Tips
+    \item Write your own Gherkin
+\end{itemize}
+
+\chapter*{Guide}
+
+\section*{Before we get started}
+
+This is a chance for the individuals on the course to connect with the material that will be covered during the training. There may be some pushback against answering questions they don't know the answers to before the training – reassure them that they will be given the chance to review their answers after the training and we are just trying to generate discussion.
+
+\section*{Start with the end in mind	(15-20 mins)}
+
+Once they've written their goals, get them to share them somehow: with a pair, with the room on a flip-chart, etc.
+
+\section*{Why projects go wrong	(10-15 mins)}
+
+The point of this exercise is to get people into the mindset that failure is related to misunderstandings and assumptions.
+
+\begin{itemize}
+    \item Ask people to discuss in groups
+    \item Share with the group
+\end{itemize}
+
+Close this exercise by saying that BDD is a process that reduces misunderstandings and assumptions through improved communication between business and IT
+
+\section*{BDD from 5,000 feet	(60-80 mins)}
+
+\begin{itemize}
+    \item briefly introduce the next exercise as an overview of BDD and how it will fit into their existing agile process
+    \item ask someone to read the Arrange the steps instructions, make sure everyone is ok with the exercise
+    \item give them 5-10 minutes to complete, you will probably notice they are naturally starting to talk about their answers with the table
+    \item walk around the tables helping them move through the next sections of the exercise; try to keep every table moving at about the same pace
+    \item facilitate the table group discussions by offering individual advice to tables who are stuck or puzzled. People can feel quite lost here, so make yourself available.
+    \item look out for good questions from the group that you want to highlight to everyone
+    \item once everyone has figured out Who does what?, explicitly ask for a volunteer to read out the Record your understanding and Find experts instructions
+    \item help the finders \& seekers by providing answers when there appear to be no experts in the room for a particular question
+    \item while they're working, draw the diagram up on the flip-chart
+    \item run a group discussion by asking for an example definition of each step from the room, this will naturally lead to some good discussions.
+    \item highlight the questions/answers that came up during table discussion – try to have the person/table you spoke to give their understanding, and add to it where needed.
+    \item this is a good time for a break
+\end{itemize}
+
+\section*{Deliberate Discovery}
+
+\begin{itemize}
+    \item ask everyone to turn to the Deliberate Discovery section, read the page to themselves and take a look at the comment
+    \item give them a few minutes, then ask who has been on a project like this?
+    \item ask them if they know why the project ended up like that? you will probably have several answers including misunderstandings and poor communication
+    \item take a couple of minutes to explain that the BDD enables Deliberate Discovery to mitigate these problems
+\end{itemize}
+
+\section*{Who, what and why}
+
+\begin{itemize}
+    \item ask for a volunteer to read the instructions, make sure everyone is ok with the exercise
+    \item give them 5-10 minutes to work through the paragraphs – some smaller groups may still choose to work in pairs but take a couple of paragraphs per pair, make sure they have enough time
+    \item once they have summarised their paragraphs they will probably have lots of questions and ideas and will want to discuss with their table groups, but be aware of quieter groups that may need some encouragement
+    \item lead a short group discussion about what they have learned, some suggested questions:
+    \item who needs to be involved in a discovery workshop?
+    \item what are we trying learn from a discovery workshop?
+    \item when is the right time to hold a discovery workshop?
+    \item how do you feel about timeboxing these sessions to 20-30 minutes?
+    \item what should you do if you can't finish the conversation in that time?
+    \item how can examples help you to explore a problem?
+\end{itemize}
+
+\section*{Making concrete statements}
+\begin{itemize}
+    \item ask for a volunteer to read the instructions
+    \item give them a few minutes to plot the statements on the axis, then go around the groups and answer any questions during the table discussion
+    \item allow the discussions to run to a natural end then move on
+\end{itemize}
+
+\section*{Tell a story}
+
+\begin{itemize}
+    \item ask for a volunteer to read the instructions, make sure everyone is ok with the exercise
+    \item give them 10-15 minutes to tell their stories and ask questions
+    \item go around the room and help with questions
+    \item lead a brief whole group discussion
+    \item ask for someone to give an example of returns business process that they heard
+    \item ask if this includes enough details that they could write an automated test for this business process?
+    \item ask if there's any irrelevant information for building a software implementation of this process?
+    \item ask how would they decide what details are needed and which details are irrelevant?
+\end{itemize}
+
+\section*{Essential details}
+
+\begin{itemize}
+    \item ask for a volunteer to read the instructions, make sure everyone is ok with the exercise – highlight that they should be thinking about developing this software
+    \item give them 15 minutes to work through the story, identify incidental details and have a table discussion
+    \item go around the room and listen out for disagreements
+    \item lead a short whole group discussion
+    \item ask for any examples of disagreements about incidental details?
+    \item dig into the examples and help to uncover why they disagree – e.g. is there a difference from a business / technical perspective
+\end{itemize}
+
+\section*{Discovery using examples}
+
+\begin{itemize}
+    \item ask for a volunteer to read the instructions, make sure everyone is ok with the exercise
+\end{itemize}

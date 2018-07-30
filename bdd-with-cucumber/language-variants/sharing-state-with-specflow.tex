@@ -1,0 +1,39 @@
+We need some way to share state between our step definition classes, while at the same time maintaining isolation between our scenarios. \CUKE{} encourages you to do this by using a built-in \emph{Dependency Injection (DI)} container.
+
+The problem you encountered when splitting the existing step definitions between 2 classes was sharing the \texttt{ShoutyNetwork} instance.
+
+Create a constructor in \texttt{ShoutyStep}s and \texttt{LocationsSteps}, which both take a \texttt{ShoutyNetwork} instance, and initialise the \texttt{shouty} field
+
+Run \CUKE{}. What happens? How many instances of the \texttt{ShoutyNetwork} are created?
+
+\answerbox{1}
+
+\CUKE{} has created a single instance of \texttt{ShoutyNetwork} and injected it through the constructors you just added.
+
+\CUKE{} has good documentation about different ways of sharing state between step definition classes. Read  the documentation here\footnote{http://www.specflow.org/documentation/Sharing-Data-between-Bindings/}, and then change your step definitions to use\\ \texttt{ScenarioContext.Current} to share the \texttt{ShoutyNetwork}.
+
+Which solution do you prefer? Why?
+
+\answerbox{2.5}
+
+\chapter*{Another level of indirection}
+
+You may have noticed that we are now leaving \CUKE{} to initialise our \texttt{ShoutyNetwork}, which is in our production code. Production code often has complex initialisation code, and various dependencies that change based on different configurations. So sometimes we need another solution.
+
+There's a famous computer science quote by David Wheeler, which says:
+
+\setlength{\leftskip}{1cm}
+
+    \textit{"All problems in computer science can be solved by \textbf{another level of indirection}"}
+
+\setlength{\leftskip}{0pt}
+
+And that's just what we're going to do here. 
+
+\begin{enumerate}
+    \item Create a \texttt{ShoutyHelper} class in the step definition folder
+    \item In \texttt{ShoutyHelper}, create an instance of \texttt{ShoutyNetwork} using \texttt{new}
+    \item Replace direct references to \texttt{ShoutyNetwork} in the step definition classes with references to \texttt{ShoutyHelper}
+\end{enumerate}
+
+Run \CUKE{} again. All scenarios should still be passing.

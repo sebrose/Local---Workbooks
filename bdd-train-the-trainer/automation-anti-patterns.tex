@@ -1,0 +1,32 @@
+\chapter*{Automation anti-patterns}
+
+\ifnotes
+
+\fi
+
+\ifcontent
+
+    \begin{itemize}
+        \item Complex regular expressions
+        \item Many similar regular expressions
+        \item Stepdefs are more than a couple of lines long
+        \item Automation code does not accurately implement promises of the Gherkin
+        \item All stepdefs are End-To-End
+        \item Gherkin is translated into another format for automation
+        \item Environments that don't have a Cucumber implementation assume implementation is not possible
+        \item Support code is not shared between stepdefs and programmer tests
+        \item Reliance on the existence of unchanging test data
+        \item Stepdef code is not subject to coding standards
+        \item Scenarios are not adequately isolated from each other
+        \item Transforms not used where appropriate
+        \item Hooks not used where appropriate
+        \item Stepdef files not partitioned by domain concept
+        \item Assertion stepdefs are overly strict
+        \item Scenarios not being automated before the corresponding development starts
+        \item Developers not working in a TDD approach
+    \end{itemize}
+
+    \QandAbox{What other anti-patterns have you seen?}{7}
+
+
+\fi

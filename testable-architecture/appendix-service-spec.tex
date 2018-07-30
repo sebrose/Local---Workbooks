@@ -1,0 +1,37 @@
+\chapter*{Appendix - \texttt{\ShoutyStatsService} specification}
+
+\label{service-spec}
+
+
+The full public API of \texttt{\ShoutyStatsService} is:
+
+\JAVA{\import{testable-architecture/language-variants/}{appendix-api-java.tex}}
+\CSHARP{\import{testable-architecture/language-variants/}{appendix-api-csharp.tex}}
+\CPP{\import{testable-architecture/language-variants/}{appendix-api-cpp.tex}}
+
+
+\section*{Additional documentation}
+The detailed behaviour of the methods relating to these specifications is:
+
+\begin{itemize}
+    \item The root element of the \texttt{EcoStats} XML passed to \texttt{\SetEcoStatsMethod} must have two attributes \texttt{month} and \texttt{year}, which are numeric e.g. \texttt{<EcoStats month="4" year="2016" />}
+    
+    \item Each child of the root element must have two attributes \texttt{salesPersonName} and \texttt{revenuePerMile} e.g. \texttt{<EcoStat salesPersonName="Lisa Crispin" revenuePerMile="2.503" />}
+    
+    \item If you call \texttt{\SetEcoStatsMethod} with a date earlier than the latest date already stored the service will reject the data and throw an exception
+    \begin{itemize}
+        \item Calling \texttt{\SetEcoStatsMethod} with a date equal to the latest date already stored will overwrite the previously stored data
+    \end{itemize}
+    
+    \item \texttt{\GetLatestEcoStatsDateMethod} returns XML in the format:
+    \begin{itemize}
+        \item \texttt{<LatestEcoStatsDate year="2016" month="08" />}        
+    \end{itemize}
+
+    \item \texttt{\GetEcoStatsWinnerForMethod} requires the same format XML root element as described for\\ \texttt{\SetEcoStatsMethod} above
+
+    \item \texttt{\GetEcoStatsWinnerForMethod} returns XML in the format:
+    \begin{itemize}
+        \item  \texttt{<EcoStatsWinner salesPersonName="" />}
+    \end{itemize}
+\end{itemize}

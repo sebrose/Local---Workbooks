@@ -1,0 +1,78 @@
+\chapter*{\CUKE{} API}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item  
+    \end{itemize}
+
+\fi 
+
+\ifcontent 
+    Gherkin has 5 keywords that we use to introduce steps: \texttt{Given}, \texttt{When}, \texttt{Then}, \texttt{And}, \texttt{But}.
+    
+    If you look in our feature file you'll see that we use 4 of them already. Now look in the step definition file - how many different \JAVASCRIPT{methods}\JAVA{annotations}\CSHARP{attributes}\RUBY{methods}\ can you find?
+    
+    \answerbox{1}
+    
+    Why is that?
+    
+    \answerbox{2.5}
+    
+    
+    \JAVA{
+        Replace all the \texttt{@Given} and \texttt{@When} annotations in the step definition with \texttt{@Then}. Run Cucumber again. All the steps still pass. Why?
+        
+        \answerbox{2.5}
+        
+        Now go to the feature file and replace every \texttt{Given}, \texttt{When} and \texttt{Then} with \texttt{And}. Run \CUKE{} again. All the steps still pass. Why?
+        
+        \answerbox{2.5}
+    
+        Remember, \CUKE{} is a collaboration tool and its purpose is for the team to write acceptance tests in the ubiquitous language so that everyone can understand them. The keywords (\texttt{Given}, \texttt{When}, \texttt{Then}, \texttt{And}, \texttt{But}) exist so that you can write easy to understand scenarios, but as far as \CUKE{} is concerned they all mean the same thing.
+    
+        Now undo all those edits, so that the scenarios make sense to us again.
+    }
+    
+    \JAVASCRIPT{
+        Replace all the \texttt{Given()} and \texttt{When()} method calls in the \texttt{defineSupportCode} call with \texttt{Then()}. Run Cucumber again. All the steps still pass. Why?
+        
+        \answerbox{2.5}
+        
+        Now go to the feature file and replace every \texttt{Given}, \texttt{When} and \texttt{Then} with \texttt{And}. Run \CUKE{} again. All the steps still pass. Why?
+        
+        \answerbox{2.5}
+    
+        Remember, \CUKE{} is a collaboration tool and its purpose is for the team to write acceptance tests in the ubiquitous language so that everyone can understand them. The keywords (\texttt{Given}, \texttt{When}, \texttt{Then}, \texttt{And}, \texttt{But}) exist so that you can write easy to understand scenarios, but as far as \CUKE{} is concerned they all mean the same thing.
+    
+        Now undo all those edits, so that the scenarios make sense to us again.
+    }
+    
+    \RUBY{
+        Replace all the \texttt{Given()} and \texttt{When()} method calls with \texttt{Then()}. Run Cucumber again. All the steps still pass. Why?
+        
+        \answerbox{2.5}
+        
+        Now go to the feature file and replace every \texttt{Given}, \texttt{When} and \texttt{Then} with \texttt{And}. Run \CUKE{} again. All the steps still pass. Why?
+        
+        \answerbox{2.5}
+    
+        Remember, \CUKE{} is a collaboration tool and its purpose is for the team to write acceptance tests in the ubiquitous language so that everyone can understand them. The keywords (\texttt{Given}, \texttt{When}, \texttt{Then}, \texttt{And}, \texttt{But}) exist so that you can write easy to understand scenarios, but as far as \CUKE{} is concerned they all mean the same thing.
+    
+        Now undo all those edits, so that the scenarios make sense to us again.
+    }
+    
+    \CSHARP {
+        Change \texttt{And Sean is at 0, 900} in the feature file to \texttt{When Sean is at 0, 900} and run \CUKE{}. What happens now?
+    
+        \answerbox{2.5}
+    
+        How does \CUKE{} decide which step definition to run for \texttt{And} steps?
+    
+        \answerbox{2.5}
+    
+        Now undo that edit, so that the scenarios make sense to us again.
+    }
+\fi    

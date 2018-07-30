@@ -1,0 +1,16 @@
+\begin{verbatim}
+    class MileageClaimBuilder
+    {
+        private int customerId;
+        public MileageClaim Build()
+        {
+            return new MileageClaim(..., ..., customerId);
+        }
+    
+        public MileageClaimBuilder WithCustomerID(int id)
+        {
+            customerId = id;
+            return this;
+        }
+    }
+\end{verbatim}

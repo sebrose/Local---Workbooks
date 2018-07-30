@@ -1,0 +1,32 @@
+\chapter*{Step definition arguments}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item  
+    \end{itemize}
+
+\fi 
+
+\ifcontent 
+    The \JAVA{\texttt{sean\_is\_at} }\CSHARP{\texttt{GivenSeanIsAt}}\JAVASCRIPT{\texttt{\textquotesingle{}Sean is at \LEFTCURLY{}int\RIGHTCURLY{}, \LEFTCURLY{}int\RIGHTCURLY{}\textquotesingle{}}}\RUBY{\texttt{\textquotesingle{}Sean is at \LEFTCURLY{}int\RIGHTCURLY{}, \LEFTCURLY{}int\RIGHTCURLY{}\textquotesingle{}}}\ and \JAVA{\texttt{lucy\_is\_at} }\CSHARP{\texttt{GivenLucyIsAt} }\JAVASCRIPT{\texttt{\textquotesingle{}Lucy is at \LEFTCURLY{}int\RIGHTCURLY{}, \LEFTCURLY{}int\RIGHTCURLY{}\textquotesingle{}}}\RUBY{\texttt{\textquotesingle{}Lucy is at \LEFTCURLY{}int\RIGHTCURLY{}, \LEFTCURLY{}int\RIGHTCURLY{}\textquotesingle{}}}\ step definitions are almost identical except for the person's name. We're already using \texttt{\LEFTCURLY{}int\RIGHTCURLY{}} \emph{output parameters} to extract the coordinates and pass them to the step definition.
+    
+    Let's replace the person's name in the Cucumber Expressions with another output parameter so that the person's name is also passed to the step definition as an argument.
+    
+    In the first of the existing step definitions, replace \texttt{Lucy} with \texttt{\LEFTCURLY{}word\RIGHTCURLY{}} to make it an output parameter:
+    
+    \JAVASCRIPT{\texttt{Given(\textquotesingle\LEFTCURLY{}word\RIGHTCURLY{} is at \LEFTCURLY{}int\RIGHTCURLY{}, \LEFTCURLY{}int\RIGHTCURLY{}\textquotesingle, function (...) \LEFTCURLY{}}}
+    \RUBY{\texttt{Given(\textquotesingle\LEFTCURLY{}word\RIGHTCURLY{} is at \LEFTCURLY{}int\RIGHTCURLY{}, \LEFTCURLY{}int\RIGHTCURLY{}\textquotesingle) do |x, y|}}
+    
+    Now that the cucumber expression has 3 output parameters, the step definition method is going to need an equal number parameters. What type should the new parameter be? What's a good name for it?
+    
+    Can you see where you can now replace the hard-coded \texttt{"Lucy"} in the body of the step definition method with that parameter?
+    
+    Run \CUKE{}. Did you get \JAVA{an \texttt{AmbiguousStepDefinitionsException}?}\JAVASCRIPT{a \texttt{Multiple step definitions match} error message?}\RUBY{an \texttt{Ambiguous match} error message?}\CSHARP{a \texttt{BindingException } because of an ambiguous step definition?}\ Why? What do you need to do to fix it?
+    
+    \answerbox{2}
+    
+    Run \CUKE{} and check everything is still working as before.
+\fi

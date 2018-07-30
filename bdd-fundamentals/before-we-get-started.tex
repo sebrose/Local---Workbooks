@@ -1,0 +1,80 @@
+\chapter*{Before we get started}
+
+\ifnotes
+    
+    \section*{Learning outcomes}
+    
+    \begin{itemize}
+        \item Warm-up to get people thinking about BDD and agile
+        \item Frame the scope of the day
+    \end{itemize}
+    
+    \section*{Setup}
+    
+    \begin{itemize}
+        \item Encourage attendees to do the exercise before the class begins (or while waiting for latecomers)
+        \item Emphasise that they aren't supposed to know all/any of the answers
+        \item If they don't feel comfortable guessing T/F, then skip that question or mark it with '?'
+        \item Once they've answered the questions, compare their answers with people sitting next to them. Ask them to focus on the questions where their answers are different.
+    \end{itemize}
+
+    \section*{Review}
+    
+    When you think it's time to start the class, ask them to stop. 
+    
+    Don't go through the questions now. Say "We'll got through these questions before we finish today. Hopefully, most of them will be much clearer by then, and we can discuss any that still need clarification"
+\fi
+
+\ifcontent
+    While you're waiting for the class to start, read the list of statements below. Try to write T for true and F for false next to each statement.
+    
+    Compare your answers with those of a person sitting near you. Did you agree on everything?
+    
+    \begin{enumerate}
+    \item Testing is something you can only do once developers are done coding.
+    \item On a software project, it's often the things we didn't know at the beginning that end up making the biggest impact on the project's success or failure.
+    \item Good developers don't need to test their code.
+    \item When we want to understand a requirement, getting diverse perspectives can help us to discover unknown unknowns.
+    \item Gherkin is a syntax for expressing software specifications as plain-text examples.
+    
+    \NOTMAINFRAME{
+    \item Cucumber is a tool for validating Gherkin specifications.
+    \item Given / When / Then are the main keywords in Gherkin.
+    \item Cucumber is a proprietary, closed-source tool with an expensive license.
+    \item Gherkin was designed to be hard for non-programmers to understand. }
+    \MAINFRAME{
+    \item Automating testing in a database/mainframe environment is impossible
+    \item We can't use Given / When / Then, because Cucumber doesn't run on our systems
+    \item Our test cases are easy for the business to understand
+    \item Getting hold of reliable test data is our main obstacle to test automation
+    }
+    
+    \item It's easy to estimate how long it will take to fix a defect.
+    \item It's easy to keep code clean when you have no tests.
+    \item Agile iterations / sprints mean a need for more manual regression testing.
+    \item When a team is using BDD, there is no more need for manual testing.
+    \item Refactoring is the process of making code complex and difficult to understand.
+    
+    \STANDARD{\item Developers shouldn't do any testing of their own code.
+    \item You can't be truly agile unless you have clean code.
+    \item You can't have clean code unless you refactor.
+    \item You can't refactor without good automated tests.}
+    \VENDORPRODUCTTEAMS{\item Developers can't test their own code.
+    \item You can't be truly agile unless you have clean code.
+    \item You can't have clean code unless you refactor.
+    \item You can't refactor without good automated tests.}
+    \PRODUCTOWNER{\item We have a clear understanding of a Product Owner's responsibilities
+    \item Shift-Left is about automated testing and doesn't need the Product Owner's involvement
+    \item The Product Owner is an essential part of a Scrum team}
+    \MAINFRAME{\item Developers can't test their own code.
+    \item Agile development only really works for web teams
+    \item Once code is written you should never have to change it
+    \item If our tests were automated they would get run more often
+    }
+    
+    \item Concrete examples are a good way to get a conversation going about a requirement.
+    \item Test automation is software development.
+    \item Most software requirements are well understood before development starts.
+    \item The only difference between the terms ATDD and BDD is that one was coined in the USA, and the other one came from the UK.
+    \end{enumerate}
+\fi

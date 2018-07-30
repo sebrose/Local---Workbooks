@@ -1,0 +1,124 @@
+\chapter*{Hooks}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item  
+    \end{itemize}
+
+\fi 
+
+\ifcontent 
+    Earlier we saw how \emph{Backgrounds} could be used remove duplication between scenarios. This is similar to a \emph{setup} method, but only for concepts that make sense to the business. There may be technical tasks that need to be performed, which have no place in the feature file, such as:
+    
+    \begin{itemize}
+        \item starting a web server
+        \item clearing up temporary files
+        \item truncating a database table
+    \end{itemize}
+    
+    \CUKE{} provides \emph{hooks}\CSHARP{\footnote{http://www.specflow.org/documentation/Hooks/}}\JAVA{\footnote{http://www.zsoltfabok.com/blog/2012/09/cucumber-jvm-hooks/}}\JAVASCRIPT{\footnote{https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/hooks.md}}\RUBY{\footnote{https://github.com/cucumber/cucumber/wiki/Hooks}}\ for this purpose. A hook is simply \JAVASCRIPT{an anonymous function passed into your support code.}\RUBY{a block passed into your support code.}\JAVA{a public method annotated with one of the following:
+    
+    \begin{itemize}
+        \item \texttt{@Before}: runs before each scenario
+        \item \texttt{@After}: runs after each scenario
+    \end{itemize}}
+    
+    \CSHARP{a public method annotated with one of the following:
+    
+    \begin{itemize}
+        \item \texttt{[BeforeScenario]}: runs before each scenario
+        \item \texttt{[AfterScenario]}: runs after each scenario
+    \end{itemize}}
+    
+    You can have as many hooks as you need. 
+    
+    Create a \JAVA{\texttt{ShoutyHooks} class next to your step definition classes}
+    \CSHARP{\texttt{ShoutyHooks} class next to your step definition classes}
+    \JAVASCRIPT{\texttt{shouty_hooks.js} file in the \CYBERDOJO{\texttt{features}}{\texttt{features/support}}{} directory}
+    \RUBY{\texttt{shouty_hooks.rb} file in the \texttt{features/support} directory}
+    \ and create a
+    \JAVA{\texttt{Before}}
+    \CSHARP{\texttt{BeforeScenario}}
+    \JAVASCRIPT{\texttt{Before}}
+    \RUBY{\texttt{Before}}
+    \ hook and an
+    \JAVA{\texttt{After}}
+    \CSHARP{\texttt{AfterScenario}}
+    \JAVASCRIPT{\texttt{After}}
+    \RUBY{\texttt{After}}
+    \ hook in it.
+    
+    \JAVA{
+    Be careful to import \texttt{cucumber.api.java.Before} and \texttt{cucumber.api.java.After} - JUnit, the testing framework we use, defines annotations with the same names.
+    }
+    \CSHARP{
+    Remember the \texttt{[Binding]} attribute we added to our new step definition class earlier? \CUKE{} also needs this attribute to find hooks.
+    }
+    
+    Make each hook print a different string to the console using
+    \JAVA{\texttt{System.out.println}}
+    \CSHARP{\texttt{Console.WriteLine}}
+    \JAVASCRIPT{\texttt{console.log}}
+    \RUBY{\texttt{puts}}
+    .
+    
+    Run \CUKE{}. Is the output on the console as you expected? \emph{[NOTE: due to the way output to the screen is buffered, your print statements may not interleave as expected with Cucumber's output. Check that they're in the right order]}
+    
+%    \JAVASCRIPT{Describe a situation where you might need to access the \texttt{scenarioResult} parameter passed to a hook
+%    
+%    \answerbox{2}
+%    }
+    
+    \section*{Ordered hooks}
+    
+    Now add another set of \texttt{\JAVA{Before}\RUBY{Before}\JAVASCRIPT{Before}\CSHARP{BeforeScenario}} and \texttt{\JAVA{After}\RUBY{After}\JAVASCRIPT{After}\CSHARP{AfterScenario}} hooks. What order are the two \texttt{\JAVA{Before}\RUBY{Before}\JAVASCRIPT{Before}\CSHARP{BeforeScenario}} and \texttt{\JAVA{After}\RUBY{After}\JAVASCRIPT{After}\CSHARP{AfterScenario}} hooks firing in?
+    
+    There are situations when the order that hooks run in is critical, and \CUKE{} gives you a mechanism to control this.
+    
+    \JAVA{
+    This is done by supplying an integer with the annotation:
+    
+        \setlength{\leftskip}{1cm}
+        \texttt{@Before(order = 4)}
+    
+    \setlength{\leftskip}{0cm}
+    \texttt{Before} hooks execute in ascending order, \texttt{After} hooks execute in descending order.
+    
+    If you don’t specify an order in the annotation, \CUKE{} defaults it to 10000. Remove the order attribute from one of your annotations to confirm this.
+    }
+    
+    \CSHARP{
+    This is done by supplying an integer with the annotation:
+    
+        \setlength{\leftskip}{1cm}
+        \texttt{[BeforeScenario(Order = 4)]}
+       
+    \setlength{\leftskip}{0cm}
+    \texttt{BeforeScenario} hooks execute in ascending order, \texttt{AfterScenario} hooks also execute in ascending order.
+    
+    If you don’t specify an order in the annotation, \CUKE{} defaults it to 10000. Remove the order attribute from one of your annotations to confirm this.
+    }
+    
+    \JAVASCRIPT{
+    \texttt{Before} hooks execute in the order in which they are defined,
+    \texttt{After} hooks execute in the \emph{reverse} order in which they are defined.
+    
+    What happens if you add another hook in \texttt{shout_steps.js}? Does it run before or after the hooks in \texttt{shouty_hooks.js}?  Why?
+    
+    \answerbox{2}
+    }
+    
+    \RUBY{
+    \texttt{Before} hooks execute in the order in which they are defined,
+    \texttt{After} hooks execute in the \emph{reverse} order in which they are defined.
+    
+    What happens if you add another hook in \texttt{shout_steps.rb}? Does it run before or after the hooks in \texttt{shouty_hooks.rb}?  Why?
+    
+    \answerbox{2}
+    }
+    
+    We recommend that you define \emph{related} \texttt{\JAVA{Before}\RUBY{Before}\JAVASCRIPT{Before}\CSHARP{BeforeScenario}} and \texttt{\JAVA{After}\RUBY{After}\JAVASCRIPT{After}\CSHARP{AfterScenario}} hooks next to each other.
+\fi

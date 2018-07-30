@@ -1,0 +1,57 @@
+\chapter*{A tale of two teams}
+
+You work for a digital consultancy agency and you've taken on responsibility for two new teams. You meet with each of the tech leads, Jamila and Gary, both of whom tell you that they're practicing BDD.
+
+The teams seem to be getting different levels of success however. You decide to spend some time with the team understanding more about their day-to-day activities.
+
+\section*{Jamila's Team}
+
+Jamila's team are building the SkyKids TV app. They ship the app to both Android and iOS platforms, and are working on their third major release. They use fixed-length sprints of one week. On each commit, they run tests in a continuous integration environment, then deploy the app automatically to a test environment. This test version of the app is used by their manual tester, Jarod, as well as some of the other people in the company who have kids.
+
+Every couple of days they hold a short meeting, which they call a discovery workshop, where Jarod the QA, Naomi the product owner and one of the developers and meet to discuss some of the upcoming user stories slated for the next sprint. The meeting takes half an hour. At the end of that meeting, a decision has been made whether each of the stories discussed is ready to play in the next sprint.
+
+If the story’s considered ready, Jarod and the developer usually sit down right away and write some business-facing acceptance tests as Cucumber scenarios. They publish these scenarios on Cucumber Pro for Naomi to review. Over the next few days, they may go back and forth, refining the specification to the point where everyone’s happy with it.
+
+Once the story is in play, the developers use the scenarios as automated tests to guide their development. They run them regularly on their workstations to give them rapid feedback about whether the code is doing the right thing. Once they’ve checked their code in, the tests are run again by their continuous delivery infrastructure. They run the same scenarios against both the Android and iOS versions of the app, so they know the two have feature parity.
+
+If the tests all pass, the code is automatically deployed to the test environment, where Jarod does his best to break it in new and ingenious ways.
+
+Over the previous week, this set of automated tests ran 226 times, failing 19 times. Each test run took on average 25 minutes. The team say these figures are fairly typical.
+
+When asked about problems and challenges they face, Jamila's team raise the difficulty of running automated tests on physical devices. Some of their tests flicker, failing at random, and overall they take quite some time to run. They'd like some time to experiment with Cucumberish, a new tool that allows Cucumber tests to run natively on Apple devices.
+
+\section*{Gary's team}
+
+Gary's team are maintaining the BigBucks investment web application. They support all the major desktop browsers, and are currently finishing off a release of bug fixes and regulatory changes. They use fixed-length sprints of 4 weeks. Each night, a Jenkins server runs their suite of automated tests, which takes about four hours. They maintain a playbook of installation instructions, which their tester, Quentin, uses to set up a test environment (whenever one becomes available).
+
+Every four weeks, the team hold a sprint planning meeting. This begins with Petra, the product owner, presenting (via a web conference) the highest priority user stories to the team, giving them a chance to ask questions. This takes about two hours. After she's been through the stories, Petra leaves the team to get on with the job of estimating the size of the stories and populating the sprint backlog. They generally spend the rest of the day on this.
+
+Each developer will be assigned one, or more, stories for the sprint. They get straight into writing code, testing it manually themselves as they go. If they get the time, they also write some automated unit tests. Meanwhile, Quentin divides his time between writing manual test plans for the current sprint's stories, and automating Cucumber scenarios. Generally he's doing the automation for stories that were finished in previous sprints, as he's struggling to keep up with the developers. There's a library of automation code, so he often doesn't need to disturb the developers.
+
+When Quentin's automated tests find a bug, he raises it in JIRA, and Petra prioritises it. Urgent or important defects are put into the current sprint, while others are left to be done later.
+
+After the sprint is over, the code is elevated to a UAT environment, where a team of systems testers from the business try run their own regression tests.
+
+\newpage
+
+\section*{Questions}
+
+How much time is each team spending in meetings to prepare for development work?
+
+\answerbox{2}
+
+How much time is each team spending dealing with defects?
+
+\answerbox{2}
+
+Which team do you think is producing higher-quality product? Why?
+
+\answerbox{2}
+
+Which team would you guess has a shorter lead time (time from starting work on a feature to delivery)? How would you test your hypothesis?
+
+\answerbox{2}
+
+What questions would you ask Gary to help him identify where he can start to improve his team?
+
+\answerbox{2}

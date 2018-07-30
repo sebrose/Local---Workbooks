@@ -1,0 +1,30 @@
+\chapter*{Appendix - Running Cucumber}
+
+Cucumber can be executed in different ways. Here are two alternatives available for this course.
+
+\section*{Maven}
+
+Cucumber is executed as a JUnit test with s special JUnit runner. This means that running Cucumber using Maven is the same as running the tests with Maven.
+Try each of the following:
+
+\begin{itemize}
+    \item \texttt{mvn test}
+    \item \texttt{mvn test -Dcucumber.options="-{}-strict"}
+    \item \texttt{mvn test -Dtest="CoordinateTest"}
+\end{itemize}
+
+\section*{Command line}
+
+Running Cucumber from a command line can be done like this (although you will need your classpath setup correctly)
+
+\begin{itemize}
+    \item \texttt{java cucumber.api.cli.Main}
+\end{itemize}
+
+
+\section*{Documentation}
+The documentation for running Cucumber is available at: 
+
+\begin{itemize}
+    \item \texttt{https://cucumber.io/docs/reference/jvm}
+\end{itemize}

@@ -1,0 +1,32 @@
+
+% ----------------------------------------------------------------
+\begin{titlepage}
+
+\begin{tikzpicture}[remember picture,overlay]
+\node[inner sep=0,opacity=1] at (current page.center) {\includegraphics[height=30cm]{\coverImage}};
+\end{tikzpicture}
+
+\makeatletter
+
+\tikzset{
+title/.style={
+  inner sep=50,
+  fill=white,
+  opacity=.3,
+  text opacity=1,
+  text width=\paperwidth,
+  font=\fontsize{\titleFontSize}{3.1cm}\bfseries,
+  }
+}
+
+\begin{tikzpicture}[overlay]
+    \node [title] at (10.1,-6) {\@title \\};
+    \node [title,font=\Large\bfseries] at (10.4,-18) { \emph{\workbookSubtitle}};
+    \node [title,font=\footnotesize] at (10.4,-23.9) {{\workbookFlavour } {\workbookLanguage } - Version \CucumberWorkbookVersion{  (\today)  - \targetAudience {} \targetPlatform}};
+\end{tikzpicture}
+
+\vfill
+
+
+
+\end{titlepage}

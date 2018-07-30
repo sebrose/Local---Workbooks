@@ -1,0 +1,17 @@
+In some situations we need a way to share state between our step definitions while at the same time maintaining isolation between our scenarios. \CUKE{} encourages you to do this by means of the \emph{World} object which maintains the context of any variables you need to use in the step definitions. 
+
+\CUKE{} scans the \texttt{features} folder for \emph{glue code}.  Review the file \CYBERDOJO{\texttt{features/world.js}}{\texttt{features/support/world.js}}. Change the code in \texttt{world.js} to create a \texttt{Shouty} object that can be shared by both our step definition files:
+
+\CYBERDOJO
+{\import{bdd-with-cucumber/language-variants/}{js-world-cyberdojo.tex}}
+{\import{bdd-with-cucumber/language-variants/}{js-world.tex}}
+
+The \texttt{setWorldConstructor} method points to \texttt{CustomWorld} to allow us to share state. Variables exposed in this way are accessible to all your step definitions.
+
+In our step definition code, we can make references to \texttt{this.shouty} in any of our steps. Go ahead and remove the creation of the \texttt{new Shouty()} object from both your step definition files, and replace all calls to \texttt{shouty} with calls to \texttt{this.shouty} instead.
+
+\section*{Creating the World}
+
+If the World object creation was not successful, then running \CUKE{} will cause it to spit out \texttt{undefined variable reference} errors. There can only be one world object: if you declare several, your shared state will be the one that got initialised last.
+
+The \texttt{CustomWorld} constructor is called once before each scenario is executed. This ensures that any shared variables are created fresh for each scenario.

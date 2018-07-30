@@ -1,0 +1,84 @@
+We saw how \CUKE{} will try to convert the string matched in a regular expression \emph{capture group} into an object of the type specified by the step definition. Let’s look at this more closely.
+
+\section*{Constructor conversion}
+
+One of the mechanisms Cucumber will use is to call a public constructor that takes a single \texttt{String} argument. Let's try this out using the \texttt{Coordinate} class:
+
+\begin{enumerate}
+    \item Add a new constructor to \texttt{Coordinate}:
+
+\begin{verbatim}
+    public Coordinate(String coordinate){
+        String[] component = coordinate.split(",");
+        x = Integer.valueOf(component[0].trim());
+        y = Integer.valueOf(component[1].trim());
+    }
+\end{verbatim}
+
+
+    \item Change your step definition from:
+
+\begin{verbatim}
+    @Given("^(\\w+) is at (\\d+), (\\d+)$")
+    public void person_is_at(String person, int x, int y) throws   
+                                                      Throwable {
+        shouty.setLocation(person, new Coordinate(x, y));
+    }    
+\end{verbatim}
+
+To:
+
+\begin{verbatim}
+    @Given("^(\\w+) is at (.*)$")
+    public void person_is_at(String person, Coordinate coordinate)   
+                                               throws Throwable {
+        shouty.setLocation(person, coordinate);
+    }
+\end{verbatim}
+\end{enumerate}
+
+Run Cucumber. All scenarios should still be green.
+
+
+
+\chapter*{Using a \texttt{Transformer}}
+
+In the previous example we modified the \texttt{Coordinate} class to give it a new constructor. This class was \emph{production} code and we're often not able to change production code. Instead we could use a \emph{transform}.
+
+\CYBERDOJO
+    {
+        \textbf{HINT: the \texttt{Transform} annotation and the \texttt{Transformer} class both live in the \texttt{cucumber.api} package.}
+    }
+    {}
+
+\begin{enumerate}
+    \item Change the step definition:
+
+\begin{verbatim}
+    @Given("^(\\w+) is at (.*)$")
+    public void person_is_at(String person,
+    @Transform(CoordinateConverter.class) Coordinate coordinate) throws 
+                                                             Throwable {
+        shouty.setLocation(person, coordinate);
+    }
+\end{verbatim}
+
+\item Create a new class, CoordinateConverter, in the step definition folder:
+
+\begin{verbatim}
+    public class CoordinateConverter extends Transformer<Coordinate> {
+       public Coordinate transform(String input){
+           String[] component = input.split(",");
+           int x = Integer.valueOf(component[0].trim());
+           int y = Integer.valueOf(component[1].trim());
+    
+           return new Coordinate(x, y);
+       }
+}
+\end{verbatim}
+
+\item Delete the String constructor that we added to Coordinate.
+\end{enumerate}
+
+Run \CUKE{}. All scenarios should still be green.
+

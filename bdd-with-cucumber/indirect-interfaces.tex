@@ -1,0 +1,44 @@
+\chapter*{\CUKE{} and non \JAVA{Java}\CSHARP{.NET}\JAVASCRIPT{JavaScript}\RUBY{Ruby}\ interfaces}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item Explain that Cucumber is only responsible for calling the relevant user defined automation function in response to the business-readable documentation
+        \item Describe how automation code can make use of any library available from its runtime environment
+    \end{itemize}
+
+    Specifically, Cucumber doesn't know anything about web services or Selenium. But you can write stepdef code that makes use of libraries that do.
+\fi 
+
+\ifcontent 
+    Some of the scenarios that the business are interested in will be written as end-to-end tests. This means that \CUKE{} may need to interact with web applications or REST services. \CUKE{} doesn't know anything about HTML or web browsers, so what should we do?
+    
+    All that \CUKE{} can do is run \JAVA{Java}\CSHARP{.NET}\JAVASCRIPT{JavaScript}\RUBY{Ruby}\ step definitions and, luckily, we can use any of the \JAVA{Java}\CSHARP{.NET}\JAVASCRIPT{JavaScript}\RUBY{Ruby}\ libraries that specialise in interacting with diverse interfaces, such as web browsers or REST services. Some of the more popular libraries are:
+    
+    \begin{itemize}
+        \item Selenium Webdriver: to interact with web browsers
+        \JAVASCRIPT{\item WebDriverIO (WDIO): to interact with web browsers (using a simpler API than WebDriver native)}
+        \JAVASCRIPT{\item Cucumber-Electron: to interact with the DOM in the same Node.js process running the server}   
+        \JAVASCRIPT{\item PhantomJS: a headless WebKit scriptable with a JavaScript API}
+        \JAVASCRIPT{\item Chakram: Write API tests (synchronous and asynchronous) to verify endpoints work correctly}    
+        \RUBY{\item Capybara: to interact with a Ruby web app using a headless browser}
+    
+        \JAVA{\item Jersey Client: to interact with HTTP/REST APIs}
+        \CSHARP{\item RestSharp: to interact with HTTP/REST APIs}
+        \RUBY{\item rest-client: to interact with HTTP/REST APIs}
+    \end{itemize}
+    
+    We can interact directly with 
+    \JAVA{Java}
+    \CSHARP{.NET}
+    \JAVASCRIPT{JavaScript}
+    \RUBY{Ruby}{}
+    production code from our \CUKE{} step definitions. For direct interaction with non 
+    \JAVA{Java}
+    \CSHARP{.NET}
+    \JAVASCRIPT{JavaScript}
+    \RUBY{Ruby}{}
+    languages there are implementations of Cucumber in several other languages.
+\fi

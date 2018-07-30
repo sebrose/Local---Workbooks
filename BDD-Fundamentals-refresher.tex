@@ -1,0 +1,104 @@
+\documentclass[a4paper,12pt]{report} 
+
+\usepackage{cucumber-workbook}
+
+\title{BDD\\FUNDAMENTALS\\REFRESHER}
+
+\renewcommand{\titleFontSize}{2.3cm}
+
+\newcommand{\coverImage}{bdd-fundamentals/images/cover.jpg}
+
+\newcommand{\CucumberWorkbookVersion}{4.4.4}
+
+%-------------------------------------------------------
+% What target audience is the workbook targeted at?
+% Uncomment ONLY one trainer conditional line below
+
+%\trainertrue
+\trainerfalse
+%-------------------------------------------------------
+
+\iftrainer
+    \newcommand{\targetAudience}{Trainer}
+    \contentfalse
+    \notestrue
+\else 
+    \newcommand{\targetAudience}{Delegate}
+    \contenttrue
+    \notesfalse
+\fi 
+
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \TARGETAUDIENCE
+%-------------------------------------------------------
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one language
+
+\newcommand{\workbookLanguage}{}
+
+% This workbook is not language specific, so leave blank
+%
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \LANGUAGE
+%-------------------------------------------------------
+
+%-------------------------------------------------------
+% What flavour of workbook should be produced?
+% Uncomment ONLY one flavour
+
+\newcommand{\workbookFlavour}{Refresher}
+%\newcommand{\workbookFlavour}{Vendor Product Teams}
+%\newcommand{\workbookFlavour}{Mainframe}
+
+%
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \FLAVOUR
+%-------------------------------------------------------
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one platform
+
+\newcommand{\targetPlatform}{}
+
+%
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \TARGETPLATFORM
+%-------------------------------------------------------
+
+\begin{document}
+
+\import{./}{cover.tex}
+\import{bdd-fundamentals/}{introductory-notes-only.tex}
+
+\import{bdd-fundamentals/}{deliberate-discovery.tex}
+\import{bdd-fundamentals/}{rules-examples-tests.tex}
+\import{bdd-fundamentals/}{living-documentation.tex}
+
+\import{bdd-fundamentals/}{three-practices-of-bdd.tex}
+
+
+\import{bdd-fundamentals/}{atm-examples.tex}
+\import{bdd-fundamentals/}{example-checklist.tex}
+\import{bdd-fundamentals/}{concrete-examples.tex}
+
+\import{bdd-fundamentals/}{example-mapping-shortened.tex}
+\import{bdd-fundamentals/}{rules-examples-review.tex} 
+\import{bdd-fundamentals/}{story-splitting-flowchart.tex} 
+
+
+\import{bdd-fundamentals/}{context-action-outcome.tex}
+\import{bdd-fundamentals/}{formulate-from-examples.tex}
+\import{bdd-fundamentals/}{feature-files-explained.tex}
+
+\import{bdd-fundamentals/}{bdd-from-5000.tex}
+
+\import{bdd-fundamentals/}{lift-and-shift.tex}
+
+\import{bdd-fundamentals/}{wrap-up.tex}
+
+\import{bdd-fundamentals/}{bdd-process.tex}
+
+\end{document}

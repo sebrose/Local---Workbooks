@@ -1,0 +1,45 @@
+\chapter*{Appendix 1: Shouty Product Concept}
+
+\ifnotes
+
+    Get the whole team to read this. It describes some rules/acceptance criteria. It also says what the initial priority should be (use case).
+    
+    Most delegates won't have real-life experience of coding GPS, so the range aspects are probably the most risky \& hence interesting.
+    
+    Features/rules that often come up include:
+    
+    \begin{itemize}
+        \item listener moving in \& out of range
+        \item lifetime of a shout
+        \item shouter wanting to locate the shout at place of business, not their current location
+        \item listener being able to re-shout
+    \end{itemize}
+
+\fi 
+
+
+\ifcontent
+
+    We are developing a new social media app - with some similarities to Twitter - called Shouty. Users of the app will be able to 'shout' - and will be 'heard' by other users who are within 1000m of the shouter. 
+    
+    Shouty will initially support the following use case: 
+    \begin{itemize}
+        \item Local Business Promotions e.g. "Half price coffee at Barney's Café until 12 today"
+    \end{itemize}
+    
+    The target platform is GPS-enabled smartphones.
+    
+    Functional Requirements:
+    \begin{itemize}
+        \item Shouts should be text only - limited to 2000 characters
+        \item The range of shouts should be 1000m
+    \end{itemize}
+    
+    Initial story:
+    \begin{verbatim}
+        As a business owner
+        I want Shouty users within range to receive my promotional shouts
+        So that I can generate more business
+    \end{verbatim}
+
+\fi

@@ -1,0 +1,47 @@
+\chapter*{Add another scenario}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item Describes the mechanism(s) that Cucumber provides to maintain scenario isolation
+        \item Practice creating new steps and stepdefs
+        \item Use the \texttt{?} wildcard for singular/plural
+    \end{itemize}
+
+    The new scenario introduces a new step "Lucy hears (\d+) shouts? from Sean". The person names could be wildcards or alternates. The number of shouts might be 1, so the \texttt{?} after the last \texttt{s} in \texttt{shouts} means that the expression will match \texttt{shout} or \texttt{shouts}
+    
+    The new stepdef needs to check the number of shouts made by a specific shouter, rather than just checking that they have shouted. This is an easy change, but leads to the question of how the count of shouts gets reset for each scenario. The answer varies for each Cucumber platform.
+
+\fi 
+
+\ifcontent 
+    Now we're going to add a new scenario:
+    
+    \begin{verbatim}
+      Scenario: Multiple shouts from one person
+        Given Lucy is at 0, 0
+        And Sean is at 0, 500
+        When Sean shouts
+        And Sean shouts
+        Then Lucy should hear 2 shouts from Sean
+    \end{verbatim}
+    
+    \textbf{NOTE: You will not need to change any production code to get this scenario to pass.}
+    
+    \section*{Isolation}
+    
+    Tests should not depend on each other - they should run in \emph{isolation}. You should be able to run tests in any order and get the same result. 
+    
+    \QandAbox{We have been running several scenarios and Sean has been shouting in most of them. How is it that in the scenario that you have just implemented Lucy has only heard 2 shouts from Sean?}{2.5}
+    
+    \TRAINERNOTES{
+        \JAVASCRIPT{It's the \texttt{Before} hook that recreates Shouty in this example.}
+        \JAVA{Stepdef classes are deleted at the end of each scenario}
+        \CSHARP{Stepdef classes are deleted at the end of each scenario}
+        \RUBY{It's the \texttt{Before} hook that recreates Shouty in this example.}
+    }
+    
+    \CUKE{} helps maintain isolation by \JAVA{instantiating all step definition classes}\CSHARP{instantiating all step definition classes}\JAVASCRIPT{instantiating a new \texttt{World}}\RUBY{instantiating a new \texttt{World}}\ before every scenario. \JAVASCRIPT{We'll see how this works over the next few pages.}\RUBY{We'll see how this works over the next few pages.}
+\fi

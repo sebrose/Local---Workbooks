@@ -1,0 +1,13 @@
+\CUKE{} ships with several different formatters that allow you to choose the output that it generates. By default \CUKE{} uses the \emph{pretty} formatter to output to the console. This shows each step as it executes, so the output looks just almost the same as the feature file. At the end, \CUKE{} prints a summary of how many scenarios and steps ran, and how many passed/failed.
+
+Other formats include: 
+
+\begin{itemize}
+    \item \emph{progress}: provides a less verbose output
+    \item \emph{junit}: writes output in JUnit format to a file that you specify
+    \item \emph{json}: outputs the feature as a json file
+\end{itemize}
+
+You specify the formatter using the -{}-format option at the command line. Try them out. For the junit formatter you will need to specify an output file using the -{}-out command line option.
+
+What other formats are available?

@@ -1,0 +1,56 @@
+\documentclass[a4paper,12pt]{report} 
+
+\usepackage{cucumber-workbook}
+
+\title{WRITING BETTER BDD SCENARIOS}
+
+\renewcommand{\titleFontSize}{2.3cm}
+
+\newcommand{\CucumberWorkbookVersion}{1.01}
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one target audience
+
+\newcommand{\targetAudience}{Delegate}
+% \newcommand{\targetAudience}{Trainer}
+%
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \TARGETAUDIENCE
+%-------------------------------------------------------
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one language
+
+\newcommand{\workbookLanguage}{}
+
+% This workbook is not language specific, so leave blank
+%
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \LANGUAGE
+%-------------------------------------------------------
+
+%-------------------------------------------------------
+% What flavour of workbook should be produced?
+% Uncomment ONLY one flavour
+
+\newcommand{\workbookFlavour}{Standard}
+
+%
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \FLAVOUR
+%-------------------------------------------------------
+
+\begin{document}
+
+%\import{./}{cover.tex}
+\import{writing-better-bdd-scenarios/}{before-we-get-started.tex}
+
+\import{bdd-fundamentals/}{good-gherkin.tex}
+\import{bdd-fundamentals/}{gherkin-tips.tex}
+
+\import{writing-better-bdd-scenarios/}{writing-gherkin.tex}
+
+
+\end{document}

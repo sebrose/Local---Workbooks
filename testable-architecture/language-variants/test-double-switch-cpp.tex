@@ -1,0 +1,12 @@
+\begin{verbatim}    
+    std::unique_ptr<stats_service> create_stats_service()
+    {
+        const char * initialisation_data = std::getenv("FAKE_INITIALISATION_DATA");
+        if (initialisation_data != NULL)
+            return std::make_unique<fake_stats_service>(
+                initialisation_data
+            );
+        else
+            return std::make_unique<production_stats_service>();
+    }
+\end{verbatim}

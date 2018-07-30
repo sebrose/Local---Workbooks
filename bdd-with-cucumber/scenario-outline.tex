@@ -1,0 +1,48 @@
+\chapter*{Scenario outline}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item Explain that a \emph{scenario outline} exists to improve the readability of the documentation
+        \item Explain how a \emph{scenario outline} is a template for creating \emph{scenarios}
+        \item Calculate how many scenarios will be generated
+        \item Describe a use case for multiple \emph{Examples} tables
+    \end{itemize}
+
+    There should be no need to write new step definitions. If Cucumber reports undefined steps, the most likely cause is a typo.
+    
+    It's important to stress that readability is the key goal of outlines. So, limited number of columns and row, containing only \emph{essential} data.
+    
+    Each non-header row will contribute a single scenario to a test run.
+    
+    Multiple examples tables can be tagged separately, so they might be used to illustrate specific examples that relate to a particular defect fix or a specific release. It's not a common usage.
+\fi 
+
+\ifcontent 
+    The first 2 scenarios in our feature file look almost identical. The only difference is that Sean is in a slightly different location, which affects whether Lucy can hear his shout or not.
+    
+    We can combine these 2 scenarios using a single \emph{scenario outline}. 
+    
+    \begin{verbatim}
+      Scenario Outline: only hear in-range shouts
+        Given Lucy is at 0, 0
+        And Sean is at <Seans-location>
+        When Sean shouts
+        Then Lucy should hear <what-Lucy-hears>
+        
+        Examples: some simple examples
+          | Seans-location | what-Lucy-hears |
+          | 0, 900         | Sean            |
+          | 800, 800       | nothing         |
+    \end{verbatim}
+    
+    The lines that follow the \texttt{Examples} keyword are a Gherkin \emph{table}. Each column is separated by a \emph{pipe} character '|' and each new line is a separate row. The first row of the table contains column headings, which match text in the scenario outline.
+    
+    Now replace the first 2 scenarios in \texttt{hear_shout.feature} with the single scenario outline above and run \CUKE{} again. You may find that you only need to edit the feature file - your existing step definitions probably won't need changed.
+    
+    \QandAbox{How many scenarios does Cucumber now report as passing?}{1}
+    
+    \QandAbox{A scenario outline can be followed by multiple \emph{Examples} tables each with their own name. Why might you want to do this?}{2.5}
+\fi

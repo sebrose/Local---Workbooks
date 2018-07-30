@@ -1,0 +1,53 @@
+\chapter*{Getting to green}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item Explain that developers may need to 'go round' the TDD Red/Green/Refactor loop several/many times before the acceptance test begins to pass
+        \item Describe how once all scenarios and programmer tests are green we can move to  FORMULATE SCENARIO or EXPLORATORY in the ideal BDD workflow
+    \end{itemize}
+    
+    The flow of the workbook gets the programmer test passing, but leaves the scenario failing. Uncommenting the next programmer test then forces the implementation of Pythagoras in Coordinate, which results in both the programmer test and the scenario passing.
+    
+    The Pythagoras implementation:
+    \begin{itemize}
+        \item JAVA: \texttt{return (int) Math.hypot(x-other.x, y-other.y);}
+        \item RUBY:
+        \import{bdd-with-cucumber/language-variants/}{coordinate-fix-ruby.tex}
+        \item JAVASCRIPT: You can use \texttt{Math.hypot(this.x - other.x, this.y - other.y)}
+    \end{itemize} 
+    
+    Ask if anyone did any REFACTORING. Why not?
+    
+    At the end of this section, we're back at FORMULATE
+    
+\fi
+
+\ifcontent 
+    It's time to write the production code that will make the failing \emph{programmer test} pass. You should \textbf{\underline{not}} need to edit the \emph{feature} file, the \emph{step definition} file or the \emph{programmer test} file.
+    
+    \textbf{HINT:} There's a commented out line of code in the Coordinat\texttt{e file tha}t will get the test passing.
+    
+    Run all the tests again. Both the programmer tests should be passing, but one of the scenarios should still be failing.
+    
+    \QandAbox{Does the code you have just uncommented look like a complete solution?}{2}
+    
+    Now, open the \emph{programmer test} file and uncomment the programmer test that is commented out. Run all the tests again.
+    
+    \QandAbox{Which programmer test(s) are failing? Which scenario(s) are failing?}{2}
+    
+    Can you see what changes you have to make to get the new programmer test to pass?  
+    
+    \textbf{HINT:} Use Pythagoras' theorem.
+    
+    Keep working and running all the tests until you see all the programmer tests, steps and scenarios pass.
+    
+    \section*{What we just did}
+    
+    We've just moved into new territory in the BDD cycle diagram we saw yesterday (\textbf{BDD Fundamentals}). Look at the diagram again. 
+    
+    \QandAbox{Where are we now? What do we need to do next?}{2}
+    
+\fi

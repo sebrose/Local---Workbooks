@@ -1,0 +1,45 @@
+\chapter*{Building a test double}
+
+You've probably heard of stubs, fakes and mocks. There are definitions for these words that you can look up on the Internet, but collectively they are called \emph{test doubles}. That's because you can use them (during testing) in place of the \emph{real} component that will be used in production, making your testing faster, easier and more reliable.
+
+\section*{What could possibly go wrong?}
+
+The main objection to using test doubles is that they may not work the same as the production component that they are the double of. We address this concern by using the contract tests that we just created. We'll run each of them against the production component \emph{AND} the test double to verify that they behave identically.
+
+Take a look at the class called \texttt{\FakeRevenueProvider} that implements the \texttt{\RevenueProviderInterface} interface.
+
+\QandAbox{Do you have any concerns about the implementation of \texttt{\FakeRevenueProvider}?}{2}
+
+The good news is that we have complete freedom in how we implement \texttt{\FakeRevenueProvider}. As long as it implements the method(s) defined in \textvtt{\RevenueProviderInterface} we're free to add any other methods we need to help us implement the contract tests. Remember - it only exists to make our automated testing easier. \\
+
+Now create a new test class, \texttt{\FakeRevenueProviderContractTests}, derived from \texttt{\RevenueProviderContractTests} for this test double (it's implementation will be almost identical to \texttt{\ProductionRevenueProviderContractTests}). The only method it needs to provide is an override of \texttt{\GetRevenueProviderMethod}, which should return an instance of \texttt{\FakeRevenueProvider} created using the initialisation data below (a string of customer, revenue pairs, separated by semi-colons):
+
+\hspace{2cm}\texttt{\CSHARP{string initialisationData = "19,4500;22,21995;57,300"}\JAVA{String initialisationData = "19,4500;22,21995;57,300"}\CPP{std::string initialisation_data("19,4500;22,21995;57,300")}}
+
+Now run the tests. Only the new contract tests are using the test double, and all the contract tests should pass because \textvtt{\FakeRevenueProvider} satisfies the simple \textvtt{\RevenueProviderInterface} contract.
+
+\section*{Using the test double}
+
+Now we have a seam, and two implementations of \texttt{\RevenueProviderInterface}. How are we going to switch between using the test double and using the real production service? 
+
+\QandAbox{How might we control whether \texttt{\ShoutyReportJob} uses the \texttt{\ProductionRevenueProvider} or a test double?}{3}
+
+For the purposes of this exercise we're going to do one of the \emph{simplest things that could possibly work} - you're going to set an environment variable when you want \texttt{\ShoutyReportJob} to use the test double. Let's call the variable \texttt{FAKE_INITIALISATION_DATA}. We will also use this environment variable to pass initialisation data to the test double. 
+
+So, if we don't set \texttt{FAKE_INITIALISATION_DATA} then the job should use the production service, but if we do set it, then we should use the test double (and pass the value of the variable to the \texttt{\FakeRevenueProvider} constructor).
+
+\begin{sloppypar}
+Uncomment the \texttt{\CreateRevenueProviderMethod} method in \texttt{\ShoutyReportJob} and use it to create a \texttt{\RevenueProviderInterface} reference to be passed to \texttt{\ShoutyReportProcessor}.
+\end{sloppypar}
+
+Now define \texttt{FAKE_INITIALISATION_DATA} as an environment variable with the value:
+
+\hspace{2cm}\texttt{19,123456.78;22,123456.78;57,123456.78}
+
+All the tests should still pass, but you're much less likely to suffer a "connection error".
+
+\QandAbox{You may still get an occasional "connection error". Why?}{3}
+
+\QandAbox{Does anything about the way we're switching between \texttt{\FakeRevenueProvider} and \texttt{\ProductionRevenueProvider} make you uncomfortable? What should we have done instead?}{3}
+
+\TRAINERNOTES {We shouldn't be switching in ShoutyReportJob - instead most of tests should already be further down the pyramid and there should only be a single end-to-end test that makes sure we can read and write. We may not even need to check the contents.}

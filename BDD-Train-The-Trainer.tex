@@ -1,0 +1,106 @@
+\documentclass[a4paper,12pt]{report} 
+
+\usepackage{cucumber-workbook}
+
+\title{BDD\\Train the trainer}
+
+\renewcommand{\titleFontSize}{2.3cm}
+
+\newcommand{\coverImage}{bdd-train-the-trainer/images/cover.jpg}
+
+\newcommand{\CucumberWorkbookVersion}{1.0.0}
+
+%-------------------------------------------------------
+% What target audience is the workbook targeted at?
+% Uncomment ONLY one trainer conditional line below
+
+%\trainertrue
+\trainerfalse
+%-------------------------------------------------------
+
+\iftrainer
+    \newcommand{\targetAudience}{Trainer}
+    \contentfalse
+    \notestrue
+\else 
+    \newcommand{\targetAudience}{Delegate}
+    \contenttrue
+    \notesfalse
+\fi 
+
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \TARGETAUDIENCE
+%-------------------------------------------------------
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one language
+
+\newcommand{\workbookLanguage}{}
+
+% This workbook is not language specific, so leave blank
+%
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \LANGUAGE
+%-------------------------------------------------------
+
+%-------------------------------------------------------
+% What flavour of workbook should be produced?
+% Uncomment ONLY one flavour
+
+\newcommand{\workbookFlavour}{Standard}
+%\newcommand{\workbookFlavour}{Vendor Product Teams}
+%\newcommand{\workbookFlavour}{Mainframe}
+
+%
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \FLAVOUR
+%-------------------------------------------------------
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one platform
+
+\newcommand{\targetPlatform}{}
+
+%
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \TARGETPLATFORM
+%-------------------------------------------------------
+
+\begin{document}
+
+\import{./}{cover.tex}
+
+% REFRESH
+\import{bdd-train-the-trainer/}{shift-left.tex}
+\import{bdd-fundamentals/}{three-practices-of-bdd.tex}
+\import{bdd-fundamentals/}{bdd-from-5000.tex}
+
+
+% DISCOVERY
+\import{bdd-train-the-trainer/}{discovery-anti-patterns.tex}
+\import{bdd-fundamentals/}{example-checklist.tex}
+\import{bdd-train-the-trainer/}{better-examples.tex}
+\import{bdd-fundamentals/}{discovery-workshop.tex}
+\import{bdd-train-the-trainer/}{example-mapping-analysis.tex}
+
+
+% FORMULATION
+\import{bdd-train-the-trainer/}{formulation-anti-patterns.tex}
+\import{bdd-fundamentals/}{gherkin-tips.tex}
+\import{bdd-train-the-trainer/}{better-bdd-scenarios.tex}
+\import{bdd-train-the-trainer/}{bdd-scenario-quiz.tex}
+
+
+% AUTOMATION
+\import{bdd-train-the-trainer/}{automation-anti-patterns.tex}
+\import{bdd-train-the-trainer/}{support-code.tex}
+\import{bdd-with-cucumber/}{pyramid.tex}
+\import{bdd-with-cucumber/}{iceberg.tex}
+\import{bdd-train-the-trainer/}{test-data.tex}
+
+% WRAP UP
+% BDD is NOT (just) about test automation
+
+\end{document}

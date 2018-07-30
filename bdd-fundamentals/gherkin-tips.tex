@@ -1,0 +1,30 @@
+\chapter*{Gherkin tips}
+
+\ifnotes
+
+    It's best to clarify the "What, not how" advice. The terminology in the scenario should be rooted in the domain constrained by the rule it's illustrating. So, it would be OK to use UI terminology if the scenario is illustrating a UI rule.
+
+\fi 
+
+\ifcontent
+
+    In addition to the Good Example Checklist earlier in the workbook, here are some tips for Gherkin:
+    
+    \begin{itemize}
+        \item Give it a name - “The one where…”
+        \item One rule per scenario
+        \item Write the outcome (Then) first. Work upwards to the When and Given.
+        \item Use "should" in Then steps
+        \item Single When per Scenario
+        \item Write Given steps in past tense whenever possible
+        \item What, not how. No UI in steps (click, fill in)
+        \item Max 5 steps per scenario
+        \item Use concrete values
+        \item No emotions (Given I want to...)
+        \item No actions without system (Then driver drives to) 
+        \item Omit the obvious (Given app is open)
+        \item Be deterministic (no “or”)
+        \item Make sure it can fail 
+    \end{itemize}
+    
+\fi

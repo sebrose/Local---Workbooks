@@ -1,0 +1,55 @@
+\chapter*{Growing your specification}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item Contrast the reasons for separating scenarios with those for separating stepdefs
+        \item Describe the issues that result from spreading stepdefs over several files
+        \item Explain that stepdefs exist in a global name space and the beneficial impact that has on the ubiquitous language
+    \end{itemize}
+    
+    As our documentation grows we'll need multiple feature files and multiple stepdef files. Feature files are organised by business relevant capabilities e.g opening an account; check out; managing stock levels etc. Stepdefs should be organised by domain concept e.g. account; basket; inventory. One scenario may refer to stepdefs from several domains, and most stepdefs will be referenced from several features.
+    
+    You should try this out for each language you train in:
+    \begin{enumerate}
+        \item Create a new step definition file, replacing 'shout' with 'location' in the name. Both stepdef files should be in the same folder
+        \item copy the whole content of the shout stepdef file into the new location stepdef file
+        \item delete the \texttt{Given} stepdefs from the shout stepdef file
+        \item delete the \texttt{When} and \texttt{Then} stepdefs from the location stepdef file
+    \end{enumerate}
+    
+    There is a nice refactoring you can do here as lots of code that relates to shouting and asserting can be deleted from \texttt{location\_steps}
+    
+    At this point when you run \CUKE{} you will get null pointer exceptions or undefined property errors. This is because there are two distinct Shouty objects, one that know where people are, and the other that knows who is shouting.
+
+    
+    In this example that state is stored in the Shouty object. Once we split the stepdefs into two files we have to find a way of sharing that state between them. The naive way we do this is to create two instances of Shouty, but now one of them knows the location of Shouty user, while the other knows about what has been shouted, and by whom. Until we can find a way of sharing the same Shouty instance between all stepdef files, the automation will not work.
+\fi 
+
+\ifcontent 
+    Right now we have a single feature file and a single step definition file. You've already learnt that a feature file acts as the specification of one capability of your application. Your application will have many capabilities and there will be many feature files. It is tempting to create a single step definition for each feature file, but this is not a good idea. Remember that \CUKE{} loads all step definitions when it starts - and they all exist in a single, global scope.
+    
+    Instead create step definition files aligned to your domain entities (such as customer, account, fund). If you organise your step definitions like this, then it will be easier to find the step definition that you need, no matter which feature file you are working with.
+    
+    
+    \section*{Separating the step definitions}
+    
+    Even though we have only just started with this application, we already have step definitions for 2 domains in a single step definition file:
+    \begin{itemize}    
+        \item Location domain: the step(s) that say where a person is located
+        \item Shout domain: the step(s) that control the shouting and hearing of messages
+    \end{itemize}
+    
+    Create a new step definition
+    \JAVA{class, \texttt{LocationSteps}}
+    \JAVASCRIPT{file, \texttt{features/location_steps.js}}
+    \RUBY{file, \texttt{location_steps.rb}}
+    \CSHARP{class, \texttt{LocationSteps}}, 
+    and move the steps that deal with location into it. 
+    
+    \CSHARP{You will need to annotate the class with \texttt{[Binding]} attribute. \CUKE{} uses this attribute to find classes which contain step definitions.}
+    
+    \QandAbox{What problem is this going to cause? What happens if you run \CUKE{} now?}{2.5}
+\fi

@@ -1,0 +1,34 @@
+\chapter*{Backgrounds}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item Describe how a background works within the lifecycle of a scenario
+        \item Explain that backgrounds damage locality of reference
+    \end{itemize}
+
+    The steps in a background will be run before running each scenario in the current feature file. 
+    
+    A background forces the reader of the documentation to remember that it's there. This can be problematic. Avoid them.
+\fi 
+
+\ifcontent 
+    Sometimes each scenario in a feature file repeats exactly the same \texttt{Given} step(s). It can be useful to remove this duplication by placing them in a \texttt{Background} which gets run before \underline{each} scenario. In our example Lucy is always at \texttt{ 0, 0 } so we could move this step into a background.
+    
+    \begin{verbatim}
+      Background:
+        Given Lucy is at 0, 0
+    \end{verbatim}
+    
+    Create this background in your feature file and remove the references to "\texttt{Lucy is at 0, 0}" from all the scenarios. Run \CUKE{} again to make sure it's all still working.
+    
+    Remember, though, that the purpose of the feature file is to make the specification of the system easy to read. Moving steps out of a scenario and into a background can make it harder to read the feature file, because now each scenario now needs to be read in conjunction with the background.
+    
+    \TRAINERNOTES{
+        Is the feature file really easier to read now?
+        
+        I discourage students from using backgrounds, because it harms 'locality of reference'. When reading the feature file, you always have to remember what's at the top.
+    }
+\fi

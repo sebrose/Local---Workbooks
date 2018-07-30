@@ -1,0 +1,127 @@
+\chapter*{Data tables}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item Explain that data tables are about readability of the documentation
+        \item Describe the difference between \emph{Examples} tables and \emph{Data tables}
+        \item Show how automatic conversions (depending on Cuke flavour) can make the automation code more readable
+    \end{itemize}
+
+    Tables can present information in a way that's easier to read and interpret, as long as:
+    
+    \begin{itemize}
+        \item the amount of data presented is not excessive, and
+        \item all the data is essential to illustrating the behaviour
+    \end{itemize}
+    
+    People need to understand that both scenario outlines and data tables use pipe delineated, text tables, but that their uses are entirely different.
+    
+    \begin{itemize}
+        \item Examples tables are consumed by Gherkin/Cucumber
+        \item Data tables are consumed by stepdef automation code
+    \end{itemize}
+    
+    Some flavours of Cucumber provide automatic conversions from a 2D tabular data structure to  structures that more closely model the abstractions being referenced in the scenario. \emph{TRAINERS SHOULD FAMILIARISE THEMSELVES WITH THESE CONVERSIONS BEFORE THE COURSE}
+\fi 
+
+\ifcontent 
+    If you look at the \emph{Multiple shouters} scenario that includes Sean, Lucy, and Oscar you can see that it's a bit hard to read. \CUKE{} and Gherkin let you use \emph{data tables} in a step, which can help you remove clutter and improve the readability of the specification. The scenario could be simplified by using a data table, like this:
+    
+    \begin{verbatim}
+      Given people are located at
+        | name  | x    | y   |
+        | Lucy  | 0    | 0   |
+        | Sean  | 0    | 500 |
+        | Oscar | 1100 | 0   |
+    \end{verbatim}
+    
+    Modify the scenario and run \CUKE{}. You should get an undefined step error, because this is a new step. Look at the \emph{snippet} that has been emitted, which \JAVA{describes how you can change the step definition parameter so that you can tell Cucumber what sort of data structure you want the table wrapped up in.}\CSHARP{defines a step definition that takes a \texttt{TechTalk.SpecFlow.Table} parameter.}\JAVASCRIPT{defines a step definition that takes a \texttt{table} argument.}\RUBY{defines a step definition that takes a \texttt{Cucumber::MultilineArgument::DataTable} argument.} 
+    
+    \JAVA{
+        Start by implementing the new stepdef using the \texttt{DataTable} class. The rows/columns are indexed from \texttt{0}, so \texttt{table.get(1).get(0)} will retrieve the cell in the first column of the second row.
+        
+        \QandAbox{How much do you like the look of the code?}{1}
+        
+        Next, create a new class \texttt{PersonLocation} (in the step definition package) with instance variables called \texttt{name}, \texttt{x}, and \texttt{y}.
+        
+        Then, change the step definition parameter from \texttt{DataTable} to \texttt{List<PersonLocation>}. Now you can change the implementation of your stepdef to iterate over the list.
+        
+        \QandAbox{Is the code more readable?}{1}
+        
+        Cucumber provides three other automatic conversions for Data Tables (see next page).
+    }
+    \CSHARP{
+        There are a number of ways that you can use this parameter (see the following page), but to start with let's keep it simple and use the \texttt{Table.Rows} property, which returns a collection of objects that implement the \texttt{IDictionary} interface. There's an entry in the collection for each row (except the heading).
+    }
+    \JAVASCRIPT{
+        This table will allow you to iterate over it returning an object for each content row, keyed by the header row. You can use this in your step definition to see an example:
+    
+        \hspace*{1em}\texttt{table.hashes().forEach(row => \LEFTCURLY} \newline
+        \hspace*{1em}\texttt{\ \ console.log(row)}  \newline
+        \hspace*{1em}\texttt{\RIGHTCURLY)}
+    }
+    \RUBY{
+        This table will allow you to iterate over it returning a \texttt{Hash} for each content row, keyed by the header row. You can use this in your step definition to see an example:
+    
+        \hspace*{1em}\texttt{table.hashes.each do |row|} \newline
+        \hspace*{1em}\texttt{\ \ p row} \newline
+        \hspace*{1em}\texttt{end}
+    }
+    
+    
+    Now get the scenario passing again.
+    
+    \JAVASCRIPT{
+        What other methods are available on the table to get the row data?
+    
+        \answerbox{4}
+    }
+    
+    \RUBY{
+        What other methods are available on the table to get the row data?
+    
+        \answerbox{4}
+    }
+    
+    \JAVA {
+        \chapter*{Supported data table formats}
+        
+        \section*{\texttt{DataTable}}
+        Snippets generated for steps containing tables will use Cucumber's \texttt{DataTable}. This type gives your step definition direct access to the data in the scenario, which is ideal if the data doesn't fit neatly into one of the shapes described in the next four sections below. It also has some extremely useful methods, especially \texttt{diff} and \texttt{unorderedDiff}, which compare two \texttt{DataTables} and throw an exception if they are different (containing a string representation of the difference).
+        
+        \section*{\texttt{List<YourType>}}
+        The first row of the table should match the names of your type's member variables. Each row will then create a new instance of your type. A list will be passed to the step definition, with one entry for each non-header row.
+        
+        \section*{\texttt{List<List<E>{}>}}
+        There is no header row. Each row will create a list of the specified scalar type, E. A list of these lists will be passed to the step definition, containing one list for each row. All cells must be representable by the specified scalar type, E.
+        
+        \section*{\texttt{List<Map<K,V>{}>}}
+        The first row of the table specifies the keys that will be used in the maps. Each subsequent row will then create a new map with an entry for each unique key. A list of maps will be passed to the step definition, with one map for each non-header row.
+        
+        \section*{\texttt{Map<K,V>}}
+        There is no header row. This is for 2 column tables only. Each row will create an entry in a map - the left column is the key, the right column is the value. The map will be passed to the step definition, with one entry for each unique key in the table.
+    }
+    
+    \CSHARP {
+        \chapter*{TechTalk.SpecFlow.Assist namespace}
+        
+        The \texttt{Rows} property is very useful, but included in the \texttt{TechTalk.SpecFlow.Assist} namespace are some extension methods that give some further functionality.
+        
+        \section*{\texttt{CreateInstance<YourType>()}}
+        
+        This method creates an instance of \texttt{YourType} using the values in the table.
+        
+        If the table has two rows, then the first row is assumed to be the name of the property in \texttt{YourType} and the second row is the value that should be assigned to it.
+        
+        If the table has two columns, with titles \texttt{Field} and \texttt{Value}, then the property named in the first column will be set to the value in the second column.
+        
+        \section*{\texttt{CreateSet<YourType>()}}
+        
+        This method will create an instance of \texttt{YourType} for each non-header row of the table. It will try to match the row headers with the names of public properties of \texttt{YourType} and set them using the values found in each row.
+        
+        Change your implementation of the step definition to use the \texttt{CreateSet} method. (You'll need to create a class with properties called \texttt{Name}, \texttt{X} and \texttt{Y})
+    }
+\fi

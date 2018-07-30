@@ -1,0 +1,43 @@
+\chapter*{Contract tests}
+
+There's an implicit contract between \texttt{\ShoutyReportProcessor} and \texttt{\RevenueProviderInterface}, which is how developers know what to expect when they call the service. The best way to document this is through a set of \emph{contract tests} that describe the contract using concrete examples.
+
+\section*{Test driven contracts}
+
+\begin{sloppypar}
+The best approach is to use contract tests to drive out the design of the interface and the implementation of the production wrapper. We've already jumped ahead and implemented \texttt{\RevenueProviderInterface} and \texttt{\ProductionRevenueProvider}, so let's take a step back and think about the implicit contract.
+\end{sloppypar}
+
+\QandAbox{Try to express that contract as rules and examples...}{4}
+
+
+\section*{Documenting the contract}
+
+\NOTCPP{Now look at the \texttt{\RevenueProviderContractTests} class } \CPP{Now look at \texttt{revenue_provider.contract.tests.cpp} } and implement the two empty tests that it contains. (Can you see how it fits together with \texttt{\ProductionRevenueProviderContractTests}?)
+
+\QandAbox{How are you going to reliably find valid and invalid customer IDs to use in these tests?}{2}
+
+\begin{sloppypar}
+
+\textbf{HINTS: You can use \texttt{22} as a valid customer ID and \texttt{25} as an invalid customer ID. Remember -- you're dealing with potentially volatile production data when you use \texttt{\ProductionRevenueProvider}, so don't make your contract tests any stricter than you need to.}
+
+Run the tests - and watch them all pass.
+
+\QandAbox{Are your contract tests checking the value returned by \texttt{\GetRevenueMethod}? Is that safe? Is it necessary?}{2}
+\end{sloppypar}
+
+\QandAbox{Do you have enough contract tests to be confident that the \texttt{\ProductionRevenueProvider} is behaving as expected?}{2}
+
+\QandAbox{What happens if revenue is requested for a customer ID that doesn't exist?}{2}
+
+Express this behaviour as a contract test, considering how best to signal the error to the caller -- i.e. what should the contract be?
+
+
+\section*{Reusable contract tests}
+
+If you have more than one implementation of \texttt{\RevenueProviderInterface} then each implementation should satisfy the contract. One way of doing this would be to create a set of contract tests for each implementation.
+
+\QandAbox{What problems might you run into by duplicating contract tests like this? How could you avoid duplication and run a single set of contract test against multiple implementations?}{3} 
+
+\TRAINERNOTES{Tests are in an abstract base class containing contract tests and a pure virtual method that returns the implementation to run them against, \texttt{CreateRevenueProvider}. Derive a test class for each implementation that provides an override for \texttt{CreateRevenueProvider()}. Then, depending on framework, the contract tests in the base class will be run once for each concrete derived class.}
+

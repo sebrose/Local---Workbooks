@@ -1,0 +1,23 @@
+\texttt{eco_stat.hpp}
+
+\begin{verbatim}
+    #ifndef ECO_STAT_INCLUDED
+    #define ECO_STAT_INCLUDED
+    
+    #include <string>
+    
+    struct eco_stat
+    {
+        std::string sales_person_name;
+        double revenue_per_mile;
+    
+        eco_stat(const std::string & sales_person_name_,
+                 double revenue_per_mile_)
+        : sales_person_name(sales_person_name_)
+        , revenue_per_mile(revenue_per_mile_)
+        {
+        }
+    };
+    
+    #endif
+\end{verbatim}

@@ -1,0 +1,30 @@
+\chapter*{A new requirement}
+
+The Eco Tzar has reviewed the end-to-end tests and has asked whether the system will cope with a salesperson that has visited more than one customer in a month. She's provided this example mileage claim:
+
+\begin{verbatim}
+    David Allen,130000,57
+    David Allen,2000,19
+\end{verbatim}
+
+\QandAbox{What should the correct Eco Score be for David?}{2}
+
+\QandAbox{Do you think the generated report will be right?}{2}
+
+\section*{Test drive the development}
+
+Write a new test case that uses the Eco Tzar's example to create a new pair of input/output files \texttt{test_case_4_input.csv} and \texttt{test_case_4_expected.xml}
+
+Now, use the new test to drive out a change to the code to implement the new requirement. Remember - you should see the new test fail before you try to implement the solution.
+
+Hint: refactor \texttt{\CSHARP{ShoutyReportProcessor.Process()}\JAVA{ShoutyReportProcessor.process()}\CPP{shouty_report_processor.process()}} to first group claims by salesperson name.  You can do this by iterating over the \texttt{\NOTCPP{mileageClaims}\CPP{mileage_claims}} collection creating a data structure of type \texttt{\CSHARP{IDictionary<string, IList<MileageClaim>>}\JAVA{Map<String, List<MileageClaim>>}\CPP{map<string, vector<mileage_claim> >}}. Then, for each entry in the \texttt{\CSHARP{dictionary}\JAVA{map}\CPP{map}}, iterate over the list summing up the total revenue and the total miles travelled by that salesperson. You can then calculate a combined \texttt{\NOTCPP{revenuePerMile}\CPP{revenue_per_mile}} value for each salesperson.
+
+\section*{Was that still painful?}
+
+Think back to when you fixed the first bug.
+
+\QandAbox{Was this code change more or less complex?}{2}
+
+\QandAbox{Did the reduction in connection errors make it easier to run the tests frequently?}{2}
+
+\QandAbox{How does your test distribution compare to the testing pyramid?}{2}

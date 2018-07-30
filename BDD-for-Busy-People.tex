@@ -1,0 +1,62 @@
+\documentclass[a4paper,12pt]{report} 
+
+\usepackage{cucumber-workbook}
+
+\title{{B}{D}{D}\\FOR\\BUSY\\PEOPLE}
+
+\newcommand{\coverImage}{bdd-for-busy-people/images/cover.jpg}
+
+\renewcommand{\workbookSubtitle}{A half-day workshop for business leaders, executives and managers}
+
+\renewcommand{\titleFontSize}{5cm}
+
+\newcommand{\CucumberWorkbookVersion}{1.0.0}
+
+\newcommand{\targetAudience}{Delegate}
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one language
+
+\newcommand{\workbookLanguage}{}
+
+% This workbook is not language specific, so leave blank
+%
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \LANGUAGE
+%-------------------------------------------------------
+
+%-------------------------------------------------------
+% What flavour of workbook should be produced?
+% Uncomment ONLY one flavour
+
+\newcommand{\workbookFlavour}{Standard}
+%\newcommand{\workbookFlavour}{Vendor Product Teams}
+%\newcommand{\workbookFlavour}{Product Owner}
+%\newcommand{\workbookFlavour}{Mainframe}
+
+%
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \FLAVOUR
+%-------------------------------------------------------
+
+\begin{document}
+
+\import{./}{cover.tex}
+\tableofcontents
+\part{Welcome}
+\import{bdd-for-busy-people/}{before-we-get-started.tex}
+\import{bdd-for-busy-people/}{intro.tex}
+\part{Key Concepts}
+\import{bdd-for-busy-people/}{what-is-bdd.tex}
+\import{bdd-fundamentals/}{bdd-from-5000.tex}
+\import{bdd-for-busy-people/}{costs-and-benefits-of-bdd-transition.tex}
+\import{bdd-fundamentals/}{cucumber-demo.tex}
+\import{bdd-for-busy-people/}{good-gherkin.tex}
+\part{Digging Deeper}
+\import{bdd-for-busy-people/}{practitioner-tales.tex}
+\import{bdd-for-busy-people/}{elevator-pitches.tex}
+\part{In Conclusion}
+\import{bdd-for-busy-people/}{conclusion.tex}
+
+\end{document}

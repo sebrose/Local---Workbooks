@@ -1,0 +1,28 @@
+\chapter*{Sharing state}
+
+\ifnotes
+
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item Describe the mechanism(s) for sharing state in the current flavour of Cucumber
+        \item Explain how some of these mechanisms require us to consider how to enforce isolation
+        \item Argue that no changes should be made to production code to help our automation code
+    \end{itemize}
+    
+    The behaviour of one scenario should have no impact on the behaviour of any other scenario. Scenarios should be runnable in any order. This is ISOLATION. Without enforcing isolation you will probably see the count of shouts returned by Shouty growing above 2 - leading to failing tests (false negatives).
+    
+    In Java the typical approach is Dependency Injection, where the DI container is responsible for creating a singleton and sharing it. Depending on the DI container chosen, it may be necessary to do something to enable Cucumber to signal that the container should delete all relevant state. When using Spring this is done using the "\texttt{cucumber-glue}" scope. 
+
+    Be sure you understand the mechanism used in the flavour of Cucumber that you will be training with.
+    
+    NO changes should need to be made to production code to help our automation code share state or enforce isolation. If the exercise does instruct changes to production code, then it will go on to present other approaches that remedy this.
+\fi 
+
+\ifcontent 
+    \JAVA{\import{bdd-with-cucumber/language-variants/}{sharing-state-with-spring.tex}}
+    \CSHARP{\import{bdd-with-cucumber/language-variants/}{sharing-state-with-specflow.tex}}
+    \JAVASCRIPT{\import{bdd-with-cucumber/language-variants/}{sharing-state-with-cucumber-js.tex}}
+    \RUBY{\import{bdd-with-cucumber/language-variants/}{sharing-state-with-cucumber-ruby.tex}}
+\fi

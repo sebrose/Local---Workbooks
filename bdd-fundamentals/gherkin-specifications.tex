@@ -1,0 +1,91 @@
+\chapter*{Gherkin Specifications}
+
+\ifcontent
+
+    Gherkin is the name of the specification language that Cucumber understands. It's designed to be just formal enough to be read by a computer, but flexible enough that people can use it too.
+    
+\fi 
+
+\section*{Given / When / Then}
+
+\ifnotes
+
+    Alternative: get tables to do this exercise as a group
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item Explain that Gherkin is an easy-to-read format
+        \item Describe how terms in the ubiquitous language only need to be understood within your organisation (bounded context) - we're writing for a specific audience, not the world in general
+    \end{itemize}
+    
+    
+    Ask the room: Does anyone recognise this structure? (It's Context-Action-Outcome)
+
+\fi
+
+\ifcontent
+
+    Here are some examples of Gherkin scenarios from real projects:
+
+\begin{verbatim}
+    Scenario: Withdrawal from account in credit reduces balance
+      Given my account has a balance of $100
+      When I withdraw $25
+      Then my account balance should be $75
+    
+    Scenario: Create a new user account
+      Given an unauthenticated session
+      And I provide an acceptable username and password
+      When I request a new account
+      Then a new account should be created for me
+\end{verbatim}
+
+\fi
+
+\chapter*{Practice Given / When / Then}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item Explain the difference between Context/Action/Outcome
+        \item Describe the use of conjunctions: And/But
+        \item Explain why there is no conjunction: Or 
+    \end{itemize}
+
+\fi 
+
+
+\ifcontent
+    The following steps have been jumbled up. Write them out in the correct order.
+
+\begin{verbatim}
+    Given ...       I should have $75 in my account
+    When ...        I have $100 in my account
+    Then ...        I withdraw $25
+      
+
+    Given ...       I request to withdraw $25
+    When ...        I have $10 in my account
+    Then ...        I should still have $10 in my account
+    
+
+    Given ...       I request to withdraw $50
+    And ...         I have an overdraft limit of $100
+    When ...        I have $10 in my account
+    Then ...        I should be overdrawn by $40 in my account
+
+
+    Given ...       I request to withdraw $30
+    And ...         The ATM does not hold any $10 bills
+    When ...        I have $100 in my account
+    Then ...        I should still have $100 in my account  
+    
+    
+\end{verbatim}
+
+    \QandAbox{Swap answers with someone at your table and check one another's answers. Did you give the same answers? If not, why not?}{5}
+
+\fi

@@ -1,0 +1,84 @@
+\chapter*{What is \CUKE{} telling us?}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item Be able to run programmer tests and scenarios at the same time
+        \JAVA{\item Understand the numbers of passed/run tests emitted by JUnit}
+        \item Read Cucumber's output and interpret its meaning
+        \item Explain how the developer followed the ideal BDD workflow described in BDD Fundamentals
+    \end{itemize}
+
+    There are plenty of different ways to run Cucumber depending on the tools the class is using. If possible, find a way to run Cucumber/Specflow \& developer tests at the same time. Using Rake/Ruby, for example, it's more usual to run RSpec and Cucumber sequentially in a single build target - meaning that if the first fails, the next will not be run.
+    
+    If you're using a mechanism that bridges between Cucumber and an xUnit output format, this is a good point to explain how that helps integrate with standard CI tools.
+    
+    Vanguard: In SDS/Eclipse, using a Maven project, you can right-click on the \texttt{test} folder and run everything beneath there as a JUnit test.
+    You may want to explain the number of tests being reported: each scenario + each step + each programmer test. (Cuke runners that don't find any scenarios report as 1 test that didn't run)
+    
+    Explain to PO that there's a failing acceptance test in an area of the product that the development team is currently working on.
+
+    \section*{How did we get here?}
+    
+    To reinforce the BDD/TDD cycle, ask the class to work out which scenarios/programmer tests got written in which order.
+    
+    \begin{enumerate}
+        \item AUTOMATE SCENARIO: The scenario \textbf{In range shout is heard} was written, automated and seen fail
+        \item WRITE FAILING PROGRAMMER TEST: The programmer test \textbf{it_calculates_the_distance_from_itself} was written and seen fail
+        \item MAKE TEST PASS: A minimal Coordinate class was created with the \textbf{distanceFrom} method returning a hard-coded \textbf{0}
+        \item REFACTOR: Both the scenario and the programmer test pass, but no obvious refactoring needed.
+        \item AUTOMATE SCENARIO: The scenario \textbf{Out of range shout not heard} was written, automated and seen fail
+        \item WRITE FAILING PROGRAMMER TEST: The programmer test \textbf{it_calculates_the_distance_from_another_coordinate_along_x_axis} was written and seen fail
+    \end{enumerate}
+    
+    
+\fi 
+
+\ifcontent 
+    \CYBERDOJO
+    {Press the \emph{TEST} button to run all the programmer tests and \CUKE{}  scenarios.}
+    {Can you work out how to run \CUKE{} so that it executes the \emph{scenarios} in the feature file?
+    
+    \JAVA{
+        If you're using an IDE like Eclipse or IntelliJ there will be many different ways to run Cucumber. If you're using a text editor, you may need to run Cucumber from the command line.
+        
+        There are a few different ways of running Cucumber described in the Appendix - Running Cucumber.
+    }
+    \JAVASCRIPT{
+        You will need to run \CUKE{} from the \emph{command line}.
+    
+        You can run all your \emph{scenarios} and all your \emph{programmer tests} at the same time: \texttt{npm test}
+    
+    \begin{itemize}
+        \item{} How does NPM run your scenarios?
+        \item{} How do you run your scenarios on their own?
+        \item{} What framework are we using to run programmer tests?
+    \end{itemize}
+    }
+    \RUBY{
+        You will need to run \CUKE{} from the \emph{command line}.
+    
+        You can run all your \emph{scenarios} and all your \emph{programmer tests} at the same time: \texttt{bundle exec rake}
+    
+    \begin{itemize}
+        \item{} How does Rake run your scenarios?
+        \item{} How do you run your scenarios on their own?
+        \item{} What framework are we using to run programmer tests?
+    \end{itemize}
+    }
+    }
+    
+    When you run your tests you should see a mixture of passing and failing scenarios and tests. 
+    
+    \QandAbox{The name of a \textbf{passing} scenario is:}{1}
+    
+    \QandAbox{The name of a \textbf{failing} scenario is:}{1}
+    
+    \QandAbox{The name of a \textbf{passing} programmer test is:}{1}
+    
+    \QandAbox{The name of a \textbf{failing} programmer test is:}{1}
+    
+    \QandAbox{How would you explain to your product owner what is wrong with Shouty, from what you see in  the test results?}{2.5}
+\fi

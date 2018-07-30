@@ -1,0 +1,98 @@
+\documentclass[a4paper,12pt]{report} 
+
+\usepackage{cucumber-workbook}
+
+\title{BDD\\FUNDAMENTALS}
+
+\renewcommand{\titleFontSize}{2.3cm}
+
+\newcommand{\coverImage}{bdd-fundamentals/images/cover.jpg}
+
+\newcommand{\CucumberWorkbookVersion}{4.4.3}
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one target audience
+
+%\newcommand{\targetAudience}{Delegate}
+\newcommand{\targetAudience}{Trainer}
+%
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \TARGETAUDIENCE
+%-------------------------------------------------------
+
+% ============================================================
+% Experimental content/notes approach using LaTeX conditionals
+\contenttrue
+%\contentfalse
+
+%\notestrue
+\notesfalse
+
+% ============================================================
+
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one language
+
+\newcommand{\workbookLanguage}{}
+
+% This workbook is not language specific, so leave blank
+%
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \LANGUAGE
+%-------------------------------------------------------
+
+%-------------------------------------------------------
+% What flavour of workbook should be produced?
+% Uncomment ONLY one flavour
+
+\newcommand{\workbookFlavour}{Product Owner}
+
+%
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \FLAVOUR
+%-------------------------------------------------------
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one platform
+
+\newcommand{\targetPlatform}{}
+
+%
+% If you need conditional content based on this variable, 
+% check cucumber-workbook.sty for commands using \TARGETPLATFORM
+%-------------------------------------------------------
+
+\begin{document}
+
+
+\import{./}{cover.tex}
+\import{bdd-fundamentals/}{vanguard-product-owner-notes-only.tex}
+\import{bdd-fundamentals/}{before-we-get-started.tex}
+\import{bdd-fundamentals/}{deliberate-discovery.tex}
+\import{bdd-fundamentals/}{rules-examples-tests.tex}
+\import{bdd-fundamentals/}{living-documentation.tex}
+
+\import{bdd-fundamentals/}{example-mapping-shortened.tex}
+\import{bdd-fundamentals/}{context-action-outcome.tex}
+\import{bdd-fundamentals/}{example-checklist.tex}
+\import{bdd-fundamentals/}{concrete-examples.tex}
+\import{bdd-fundamentals/}{rules-examples-review.tex}
+
+\import{bdd-fundamentals/}{formulate-from-examples.tex}
+\import{bdd-fundamentals/}{feature-files-explained.tex}
+% \import{bdd-fundamentals/}{gherkin-tips.tex}
+
+\import{bdd-fundamentals/}{pyramid-game.tex}
+\import{bdd-with-cucumber/}{iceberg.tex}
+
+\import{bdd-fundamentals/}{bdd-from-5000.tex}
+\import{bdd-fundamentals/}{three-practices-of-bdd.tex}
+
+\import{bdd-fundamentals/}{product-owner-role.tex}
+\import{bdd-fundamentals/}{wrap-up.tex}
+
+\end{document}

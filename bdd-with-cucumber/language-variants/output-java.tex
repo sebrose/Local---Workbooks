@@ -1,0 +1,14 @@
+\CUKE{} ships with several \emph{plugins} that allow you to choose the output that it generates. By default \CUKE{} for Java uses the \emph{pretty} plugin to output to the console. This shows each step as it executes, so the output looks almost the same as the feature file. At the end, \CUKE{} prints a summary of how many scenarios and steps ran, and how many passed/failed.
+
+There are several other output plugins: 
+
+\begin{itemize}
+    \item \emph{progress}: provides a less verbose output
+    \item \emph{html}: writes output in HTML format to a file that you specify
+    \item \emph{junit}: writes output in JUnit format to a file that you specify
+    \item \emph{rerun}: provides output in a format that's understood by \CUKE{}. Can you work out what it's for?
+\end{itemize}
+
+You can only specify a single console outputter, but you can generate output to as many files as you need. You tell \CUKE{} which plugins to use - either from the command line or by changing the \texttt{@CucumberOptions} annotation.
+
+Try some of them out.

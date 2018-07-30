@@ -1,0 +1,51 @@
+\chapter*{Tagged hooks}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item  
+    \end{itemize}
+    
+    \section*{Ordered \& tagged hooks}
+    In Java: \texttt{@Before(value = "@wip", order = 3)}
+
+\fi 
+
+\ifcontent 
+    Some hooks are only relevant for certain scenarios. To enable you to control the execution of a hook you can supply a tag value:
+    
+    \JAVA{\hspace*{1cm}\texttt{@Before("@SpecialTest")}}
+    \CSHARP{\hspace*{1cm}\texttt{[BeforeScenario('SpecialTest')]}}
+    \JAVASCRIPT{
+        \hspace*{1cm}\texttt{Before(\LEFTCURLY tags: "@foo"\RIGHTCURLY, function () \LEFTCURLY} \\
+        \hspace*{1cm}\texttt{\ \ // This hook will be executed before scenarios tagged with @foo} \\
+        \hspace*{1cm}\texttt{\RIGHTCURLY)}
+    }
+    \RUBY{
+        \hspace*{1cm}\texttt{Before("@foo") do} \\
+        \hspace*{1cm}\texttt{\ \ \# This hook will be executed before scenarios tagged with @foo} \\
+        \hspace*{1cm}\texttt{end}
+    }
+    
+    Hooks tagged in this way will only run if the current scenario also has this tag on it.
+    
+    Try it out.
+    
+    Can you work out how to create a tagged hook that runs for multiple tags?
+    
+    \answerbox{2.5}
+    
+    \JAVA {
+        And how can you specify a hook that is tagged AND ordered?
+        
+        \answerbox{2.5}
+    }
+    
+    \JAVASCRIPT {
+        In what order are tagged hooks executed?
+        
+        \answerbox{2.5}
+    }
+\fi

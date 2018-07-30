@@ -1,0 +1,10 @@
+\begin{verbatim}
+    private static StatsService createStatsService() {
+        if (System.getenv().get("FAKE_INITIALISATION_DATA") != null) {
+            return new FakeStatsService(
+                System.getenv().get("FAKE_INITIALISATION_DATA"));
+        }
+    
+        return new ProductionStatsService();
+    }
+\end{verbatim}

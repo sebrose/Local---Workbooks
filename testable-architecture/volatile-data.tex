@@ -1,0 +1,22 @@
+\chapter*{Volatile test data}
+
+Production data is notoriously fickle. One of the benefits of using test doubles as adaptors is that we can control the shape of the data that we use in our tests. However, the contract tests, when running against the production services, will still be at the mercy of the data that is available.
+
+Earlier we advised against making the expectations of end to end tests too restrictive. Their purpose is to make sure that the system has been deployed correctly - smaller, faster tests lower down the pyramid will demonstrate the correctness of the code.
+
+In your development environment, set an environment variable \texttt{VOLATILE_STATS_DATA} with the value \texttt{ON}. Now when you run the tests you'll likely see failures because the data that your tests rely on no longer exists.
+
+\QandAbox{How can your end to end and contract tests cope with unreliable data?}{2}
+
+In some situations your tests may be able to inject data into the underlying components, but more often its easier to get your tests to mine for suitable data themselves.
+
+Take another look at page \pageref{service-spec}. You'll see that there are methods for querying the Shouty stats service about customer IDs:
+
+\begin{itemize}
+    \item \texttt{\GetCustomerIDsMethod}
+    \item \texttt{\IsValidCustomerMethod}
+\end{itemize}
+
+Try and get your contract tests running again using these methods.
+
+\QandAbox{Do these methods form part of the contract? Did you write contract tests for them?}{3}

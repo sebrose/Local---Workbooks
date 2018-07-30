@@ -1,0 +1,61 @@
+\chapter*{Review these scenarios}
+
+\ifnotes
+
+\fi
+
+\ifcontent
+    Work in pairs or 3 people mini-groups
+    
+    Identify the good and bad parts of each scenario
+    
+    The following orientation questions can help you with the review
+    
+    \begin{itemize}
+        \item Is each scenario focused on illustrating a single business rule?
+        \item Are there too many / too few details?
+        \item Does it use a language that everyone understands?
+        \item How likely is it that this scenario will change when unrelated parts of the application changes?
+    \end{itemize}
+    
+    \begin{framed}
+        \begin{verbatim}
+    Scenario: Dispense $50 cash in multiple denominations
+    
+        Given I have $100 in my checking account
+        And I have a card with the PIN 5173
+        And I push my card into the machine
+        And I enter 5173 for my PIN
+        And I push the button next to "Withdrawal"
+        And I push the button next to "Checking"
+        When I push the button next to "$50"
+        Then I should receive two $20 and one $10
+        \end{verbatim}
+    \end{framed}
+    
+    \begin{framed}
+        \begin{verbatim}
+    Scenario: Dispense $50 cash in multiple denominations
+    
+        Given I have requested some cash 
+        When it is dispensed 
+        Then I should receive the correct mix of bills 
+        And my balance should be updated 
+        And a receipt should be printed
+        \end{verbatim}
+    \end{framed}
+    
+    \begin{framed}
+        \begin{verbatim}
+    Scenario: Dispense $50 cash in multiple denominations
+    
+        Given I have authenticated myself at the ATM
+        And I indicate which account I wish to withdraw from
+        And I confirm that I do not require a receipt
+        When I request $50
+        Then I should receive 
+            | 2 | $20 | 
+            | 1 | $10 |
+        \end{verbatim}
+    \end{framed}
+\fi

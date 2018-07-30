@@ -1,0 +1,37 @@
+\chapter*{Is this a bug?}
+
+The intranet team have reported a bug with the batch job. Sometimes, the XML report comes back with \texttt{Infinity} as the saleperson's eco score. This month's sales team mileage claim looks like this:
+
+\begin{verbatim}
+    David Allen,130000,57
+    Lisa Crispin,27000,19
+    Ian Dees,0,22
+    \end{verbatim}
+
+What do you think is going wrong?
+
+\answerbox{3}
+
+\section*{Or just a missing feature?}
+
+After some heated discussions between the sales team, the intranet team and the company's new Eco Tzar, it's decided that these zero mileage claims have been submitted in error, and so should be ignored in the calculation.
+
+So for this month, Ian will not get a score on the eco report.
+
+Write a new test case in \texttt{\CSHARP{EndToEndTests.cs}\JAVA{EndToEndTests.java}\CPP{end_to_end.tests.cpp}} that reproduces this bug, specifying the expected XML output.
+
+\begin{sloppypar}
+Hint: create a new pair of input/output files \texttt{test_case_3_input.csv} and \texttt{test_case_3_expected.xml}.
+\end{sloppypar}
+
+Now, use the new test to drive out a change to the code to fix the bug.
+
+\section*{Was that painful?}
+
+\QandAbox{Talk with your pair about the challenges you experienced in fixing this defect. What problems did you encounter?}{3}
+
+\QandAbox{Have you suffered similar problems in your real work?}{3}
+
+\QandAbox{Can you anticipate any other problems from the way we're currently testing the batch job?}{3}
+
+\QandAbox{List some challenges you might encounter when tests are integrated with unreliable / uncontrollable 3rd party systems.}{3}

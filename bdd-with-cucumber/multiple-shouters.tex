@@ -1,0 +1,126 @@
+\chapter*{Add a new scenario}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item Show the importance of ensuring the stepdef automation code accurately implements the behaviour described in the step
+        \item Explain the limitations of snippet generation
+        \item Describe strict/not strict and pending stepdefs
+        \item Demonstrate that Cucumber considers a stepdef that doesn't throw an exception as a pass
+        \item Explain the matching process that Cucumber uses
+        \item Check stepdefs for meaningful method and argument names
+        \item Give reasons why complicated regexes are a bad idea
+    \end{itemize}
+
+    We've moved from "hearing him" to "hear Sean" and "not hear Oscar". The regex won't match. What will they do - use alternates or a character class (e.g. \texttt{(Lucy|Sean|Oscar)} vs. \texttt{(\textbackslash w+)})? "Sean", "him", and "nothing" all match \texttt{\textbackslash w+} and \texttt{\{word\}}. Which does the class prefer:
+    \begin{enumerate}
+        \item Having a single stepdef with logic that checks for the text "nothing"/"him"
+        \item using the alternate regex for named people and separate stepdefs for "nothing"/"him"
+        \item Changing the wording of the "nothing" step
+    \end{enumerate}
+
+    The snippet generated won't offer an alternate for (Sean|Oscar). Nor will the generated stepdef method or argument names be meaningful. Copy \& pasted snippets will still require editing. And sometimes a snippet is generated because of a mistyped step - so they shouldn't ever blindly copy/paste a snippet without thought. It's just a hint.
+    
+    Getting this scenario to pass doesn't require any \texttt{Shouty} code to be changed. There is a problem with the stepdef implementations, though, because they're just checking the number of shouts that Lucy has heard, not who shouted them. The delegates need to understand the data structure being used - a map from shouter name to list of shouts they have made. So, "Lucy should have heard Sean" should be implemented by checking that the map returned contains an entry with the key "Sean". This is an important point - if the step automation doesn't accurately implement the behaviour described in the step, then the result of running the scenario can't be relied on.
+    
+    \RUBY {\import{bdd-with-cucumber/language-variants/}{refactored-stepdefs-after-snippets-ruby.tex}}
+    \JAVASCRIPT{\texttt{assert(!(shouter in shouty.getShoutsHeardBy(\textquotesingle{}Lucy\textquotesingle{})))}}
+
+    Pending steps signal that the automation code hasn't been written/completed yet. This will always be reported as a problem, but most implementations of Cucumber differentiate between \emph{strict} and \emph{not strict} mode. In \emph{strict} mode a pending stepdef causes the build to fail, in \emph{not strict} it doesn't.   VANGUARD: They don't use pending. Use the \texttt{@Ignore} tag instead.
+    
+    No production code needs written for this part of the exercise. Why? It's because lots of \texttt{Shouty} has already been written. Usually you'd expect to drive out the implementation using the failing scenrios, but in this case we're retrofitting documentation. It's also worth pointing out that there aren't any unit tests for \texttt{Shouty} (because this is a simplified training example) but there should be plenty!
+    
+    Get people to check the stepdef method names. Do any of them mention a single person (e.g. Lucy) even though they now match Lucy, Sean \& Oscar? This should have been checked while refactoring the stepdefs. Same goes for parameter names.
+    
+    Is it easy to navigate the file? Can you reorder stepdefs?
+\fi 
+
+\ifcontent 
+    Let's make sure that our system can handle more than one person shouting. Add this scenario to the feature file:
+    
+    \begin{verbatim}
+      Scenario: Multiple shouters
+        Given Lucy is at 0, 0
+        And Sean is at 0, 500
+        And Oscar is at 1100, 0
+        When Sean shouts
+        And Oscar shouts
+        Then Lucy should not hear Oscar
+        But Lucy should hear Sean
+    \end{verbatim}
+    
+    When you run \CUKE{} you'll see some errors. Look in the console output and you'll see that \CUKE{} has generated some template code for you - look for the text:
+    
+    \JAVA{\import{bdd-with-cucumber/language-variants/}{multiple-shouter-snippet-java.tex}}
+    \CSHARP{\import{bdd-with-cucumber/language-variants/}{multiple-shouter-snippet-csharp.tex}}
+    \JAVASCRIPT{\import{bdd-with-cucumber/language-variants/}{multiple-shouter-snippet-javascript.tex}}
+    \RUBY{\import{bdd-with-cucumber/language-variants/}{multiple-shouter-snippet-ruby.tex}}
+    
+    \QandAbox{What is \CUKE{} telling us?}{2.5}
+    
+    \QandAbox{Should you always copy the generated snippet into your step definition file?}{2.5}
+    
+    \QandAbox{Can you think of any reasons why you might have to edit the generated snippet?}{2.5}
+
+    \chapter*{Snippet generation}
+    
+    When \CUKE{} comes across a step that doesn't match any existing step definitions it signals that there is an \emph{undefined} step and the scenario containing that step is also marked as \textbf{\textit{\JAVA{undefined}\JAVASCRIPT{undefined}\RUBY{undefined}\CSHARP{inconclusive}}}. For each undefined step \CUKE{} prints out some skeleton code (called a \emph{snippet}\JAVASCRIPT{\footnote{Throughout this workbook, we use a custom snippet generator which generates synchronous step definitions. For alternatives see Appendix - Cucumber Step Definition API}}) that you can use in your step definition \JAVA{class}\CSHARP{class}\JAVASCRIPT{file}\RUBY{file}.
+    
+    \CSHARP{
+        \CUKE{} also allows you to generate step definitions for undefined steps from the feature file. Use the \texttt{Generate Step Definitions} command from the context menu. You can either generate a new step definitions class, or you can copy the snippets to your clipboard, to paste into an existing class.
+    }
+    
+    The \emph{snippet} is only a suggestion and you should edit the \JAVA{regular expression}\CSHARP{regular expression}\RUBY{cucumber expression}\JAVASCRIPT{cucumber expression}\ and the \JAVA{method's}\CSHARP{method's}\RUBY{block's}\JAVASCRIPT{function's}\ parameters so that they make sense in the context of your scenario.
+    
+    \JAVA{Edit the method name as well.}
+    \CSHARP{Edit the method name as well.}
+    
+    Copy the snippets and paste them into your step definition file and edit them so that they look \textit{just right}.
+    
+    \JAVA{Do you notice anything different about the step definition method names that you've just copied?}
+    
+    \section*{\JAVASCRIPT{Pending Steps}\RUBY{Pending Steps}\JAVA{PendingException}\CSHARP{ScenarioContext.Current.Pending()}}
+    
+    The default implementation of a snippet is to \JAVA{throw a \texttt{PendingException}}\CSHARP{call \texttt{ScenarioContext.Current.Pending()}}\RUBY{call the \texttt{pending} method}\JAVASCRIPT{\texttt{return \textquotesingle{}pending\textquotesingle{}}}. What do you think will happen when you run \CUKE{} now?
+    
+    \JAVA {
+        You'll see that the error has changed from \texttt{undefined} to \texttt{pending}. The \texttt{PendingException} is treated as a special case by \CUKE{}. It shows that the development team is still working on the step definition and we can tell \CUKE{} whether to ignore pending scenarios or cause the build to fail.
+    }
+    \JAVASCRIPT {
+        You'll see that the error has changed from \texttt{undefined} to \texttt{pending}. Returning the string \texttt{\textquotesingle{}pending\textquotesingle{}} is treated as a special case by \CUKE{}. It shows that the development team is still working on the step definition. Pending steps will cause the build to fail.
+    }
+    \RUBY {
+        You'll see that the error has changed from \texttt{undefined} to \texttt{pending}. Calling the  \texttt{pending} method is treated as a special case by \CUKE{}. It shows that the development team is still working on the step definition. Pending steps will cause the build to fail.
+    }
+    \section*{Signalling an error}
+    
+    Comment out the line that is \JAVA{throwing the \texttt{PendingException}}\RUBY{calling \texttt{pending}}\JAVASCRIPT{returning \texttt{\textquotesingle{}pending\textquotesingle{}}}\CSHARP{calling \texttt{ScenarioContext.Current.Pending()}}\ and run \CUKE{} again. What happened this time and why?
+    
+    \CUKE{} considers that any step definition that doesn't throw an exception has passed. By commenting out the "pending" statement we've changed this step from \texttt{\JAVA{pending}\JAVASCRIPT{pending}\RUBY{pending}\CSHARP{skipped}}\ to \texttt{passed}.
+    
+    If you now replace the commented out line with\ \texttt{\JAVA{throw new RuntimeException("bad step")}\JAVASCRIPT{throw new Error("bad step")}\RUBY{raise "bad step"}\CSHARP{throw new System.InvalidOperationException("bad step")}} and run \CUKE{}, you'll see the step has gone from \texttt{passed} to \texttt{failed}.
+    
+    \section*{\CUKE{} Lifecycle}
+    
+    When \CUKE{} runs the first thing it does is load all the step definitions. Then, each time it tries to run a step it searches through these step definitions looking for matches:
+    \begin{itemize}
+        \item 0 matches => Undefined step, fail scenario \& emit snippet
+        \item 1 match => Run the step definition
+        \item more than 1 match => Ambiguous step definition \& fail scenario
+    \end{itemize}
+    
+    \section*{Get to green}
+    
+    Now implement the new step definitions so that all the scenarios pass.
+    
+    You didn't have to write any production code to make this scenario pass.
+    
+    \QandAbox{Is this healthy? What problems might this show?}{2.5}
+    
+    \section*{Refactor your step definitions}
+    
+    Take a look at your Step definitions. Do you notice anything you don't like? If you do, refactor them
+    and run \CUKE{} between each change so you know you haven't broken anything.
+\fi    

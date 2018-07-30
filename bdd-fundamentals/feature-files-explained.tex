@@ -1,0 +1,71 @@
+\chapter*{Feature files}
+
+Take a look at this sample feature file and answer the questions on the next page.
+
+\begin{verbatim}
+
+    @Release_1
+    Feature: Reserving books
+        Adults pay $1 for each book reserved
+        Children can reserve up to 6 child books free
+        Children pay 50c to reserve all other items
+        
+        @Regression_Pack
+        Scenario: adult reserves a book
+            Given that Andrew has an adult membership
+            When he reserves a book
+            Then he should be charged $1
+
+        @Regression_Pack @Defect_5399
+        Scenario: adult reserves a child book
+            Given that Andrew has an adult membership
+            When he reserves a child book
+            Then he should be charged $1
+
+        @Regression_Pack
+        Scenario Outline: child reserves books
+            Given that Caroline has a child membership
+            When she reserves <number> of child book(s)
+            Then she should be charged <charge>
+            
+            Examples: Expected charges
+            | number | charge  |
+            |      1 | nothing |     
+            |      6 | nothing |
+            |      7 |     50c |
+        #   |    200 |  $97.00 | What's this one for???
+
+        Scenario: parent and child both reserve books
+            Given that Andrew has an adult membership
+            And his daughter Caroline has a child membership
+            When they reserve these books, at the same time
+                | reserver | book_type | quantity |
+                | Andrew   | child     |        1 |
+                | Caroline | adult     |        1 |
+            Then they should be charged $1.50
+\end{verbatim}
+
+
+\chapter*{Sample Feature File}
+
+When using \CUKE, the rules and examples are written into plain text file, called a \emph{Feature File}. The contents of a Feature File follow a very simple structure, called \emph{Gherkin}.
+
+On the \textbf{previous page} is a sample Feature File. See if you can identify the sections of the file that correspond to the following terms:
+
+\begin{itemize}
+    \item Tag
+    \item Scenario
+    \item Comment
+    \item Rules
+    \item Scenario outline
+    \item Data table
+    \item Examples table
+\end{itemize}
+
+\QandAbox{Can you think of a use for \emph{Tag}s?}{1.8}
+
+\QandAbox{What \emph{Tag}s apply to the "\texttt{adult reserves a child book}" scenario?}{1.8}
+
+\QandAbox{How do you think the \emph{Scenario Outline} works?}{1.8}
+
+\QandAbox{How many \emph{Scenario}s should there be in a \emph{Feature File}?}{1.8}

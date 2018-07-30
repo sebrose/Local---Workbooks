@@ -1,0 +1,91 @@
+\chapter*{Step definition arguments}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item Explain simple regex strings
+        \item Utilise regex to reduce the number of stepdefs
+        \item Understand the what happens if more than one regex matches a step
+    \end{itemize}
+    
+    We want people to replace \texttt{Lucy is at} with \texttt{(Lucy|Sean) is at} and see the error caused by the ambiguity of having more than one regex match a step.
+    
+    Regex crib sheet:
+    
+    \begin{itemize}
+        \item \CARET - match the start of a string
+        \item \DOLLAR - match the end of a string
+        \item Character classes:
+            \begin{itemize}
+                \item \BACKSLASH d - digit
+                \item \BACKSLASH w - word character (a-z A-Z 0-9 \textunderscore)
+                \item \BACKSLASH s - whitespace
+            \end{itemize}
+        \item ( ) - capture group. Each capture group will be passed as an argument to the step definition
+        \item . - wild card, matches any character
+        \item Multiplicity operators:
+            \begin{itemize}
+                \item * - 0 or more
+                \item + - 1 or more
+                \item ? - 0 or 1
+            \end{itemize}
+    \end{itemize}
+
+    Things you might want to point out:
+     \begin{itemize}
+        \item mismatch between number of capture groups and parameters on stepdef will cause an error
+        \item the order of the capture groups must match the order of the parameters
+        \item capture groups capture STRINGS, but (in typed languages) we might be receiving \texttt{int} - Cucumber is doing type coercion
+        \item if more than one regex matches the step, then Cucumber treats this ambiguity as an error
+        \item there's a trade off between using an \emph{alternate} and a \emph{character class}. Alternates may lead to more maintenance, but can help restrict documentation to known persona. Character class are more forgiving, but mistyping can cause problems
+        \item regex is a strict match - an extra or missing space can cause the match to fail unexpectedly, which can cause confusion
+     \end{itemize}
+     
+\fi 
+
+\ifcontent 
+    We're already passing integer arguments into our \JAVA{\texttt{sean_is_at} }\CSHARP{\texttt{GivenSeanIsAt}}\JAVASCRIPT{\texttt{"Sean is at"} }\RUBY{\texttt{"Sean is at"} } and \JAVA{\texttt{lucy_is_at} }\CSHARP{\texttt{GivenLucyIsAt} }\JAVASCRIPT{\texttt{"Lucy is at"} }\RUBY{\texttt{"Lucy is at"} } step definitions using regular expression \emph{capture groups}. These steps are almost identical except for the person's name. Let's replace the person's name in the regular expressions with another \emph{capture group} so that the person's name is also passed to the step definition as a parameter.
+    
+    Take the regular expressions of one of the existing step definitions, and wrap the person's name in parentheses to make it a capture group:
+    
+    \JAVA{\texttt{@Given("\CARET{}(Lucy) is at (\DOUBLEBACKSLASH{}d+), (\DOUBLEBACKSLASH{}d+)\DOLLAR{}")}}
+    \CSHARP{\texttt{[Given(@"(Lucy) is at (.*), (.*)")]}}
+    \JAVASCRIPT{\texttt{Given(/\CARET{}(Lucy) is at (\BACKSLASH{}d+), (\BACKSLASH{}d+)\DOLLAR{}/, function (x, y, callback) \LEFTCURLY{}}}
+    \RUBY{\texttt{Given(/\CARET{}(Lucy) is at (\BACKSLASH{}d+), (\BACKSLASH{}d+)\DOLLAR{}/ do |x, y|}}
+    
+    Now that the regular expression has 3 \emph{capture groups} the step definition method is going to need 3 parameters. What type should the new parameter be? What's a good name for it?
+    
+    Can you see where you can now replace the hard-coded "Lucy" in the body of the step definition method with that parameter?
+    
+    Run the tests and check everything is still working as before.
+    
+    Now add Sean as an \emph{alternate} in the regular expression capture group for the person's name:
+    
+    \JAVA{\texttt{@Given("\CARET(Lucy|Sean) is at (\DOUBLEBACKSLASH d+), (\DOUBLEBACKSLASH d+)\DOLLAR")}}
+    \CSHARP{\texttt{[Given(@"(Lucy|Sean) is at (.*), (.*)")]}}
+    \JAVASCRIPT{\texttt{Given(/\CARET(Lucy|Sean) is at (\BACKSLASH d+), (\BACKSLASH d+)\DOLLAR/, function (person, x, y, callback)}}
+    \RUBY{\texttt{Given(/\CARET{}(Lucy|Sean) is at (\BACKSLASH{}d+), (\BACKSLASH{}d+)\DOLLAR{}/ do |person, x, y|}}
+    
+    Run \CUKE{}. Did you get \JAVA{an \texttt{AmbiguousStepDefinitionsException}? }\JAVASCRIPT{a \texttt{Multiple step definitions match}\ error message? }\RUBY{an \texttt{Ambiguous match}\ error message? }\CSHARP{a \texttt{BindingException } because of an ambiguous step definition? } Why? What do you need to do to fix it?
+    
+    \answerbox{1}
+    
+    \section*{Step definition matching}
+    
+    \CUKE{} uses standard regular expressions to match steps to step definitions. Take a look at the regular expressions in the step definition file. Try to explain what these regular expression characters mean:
+    
+    \begin{itemize}
+        \JAVA{\item \texttt{\CARET}}
+        \RUBY{\item \texttt{\CARET}}
+        \JAVASCRIPT{\item \texttt{\CARET}}
+        \item \texttt{\DOLLAR}
+        \item \texttt{\JAVA{\DOUBLEBACKSLASH} \CSHARP{\BACKSLASH} \JAVASCRIPT{\BACKSLASH}\RUBY{\BACKSLASH}d}
+        \item \texttt{(   )}
+        \item \texttt{.}
+        \item \texttt{\PLUS}
+        \item \texttt{*}
+        \item \texttt{Lucy|Sean}
+    \end{itemize}
+\fi    

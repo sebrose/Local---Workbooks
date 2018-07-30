@@ -1,0 +1,21 @@
+\begin{verbatim}
+Given(/^(Lucy|Sean|Oscar) is at (\d+), (\d+)$/) do |person, x, y|
+  @shouty.set_location(person, Coordinate.new(x.to_i, y.to_i))
+end
+
+When(/^(Lucy|Sean|Oscar) shouts$/) do |shouter|
+  @shouty.shout(shouter, ARBITRARY_MESSAGE)
+end
+
+Then(/^(Lucy|Sean|Oscar) should hear (Lucy|Sean|Oscar)$/) do |listener, shouter|
+  expect(@shouty.messages_heard_by(listener)[shouter]).to eq(ARBITRARY_MESSAGE)
+end
+
+Then(/^(Lucy|Sean|Oscar) should not hear (Lucy|Sean|Oscar)$/) do |listener, shouter|
+  expect(@shouty.messages_heard_by(listener)[shouter]).to eq(nil)
+end
+
+Then(/^(Lucy|Sean|Oscar) should hear nothing$/) do |listener|
+  expect(@shouty.messages_heard_by(listener)).to eq({})
+end
+\end{verbatim}

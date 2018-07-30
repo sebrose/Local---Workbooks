@@ -1,0 +1,105 @@
+\chapter*{The development cycle}
+
+You've practiced a few techniques, some of which may be new to you. Now it's time to put them into action. First you'll fix a couple of simple bugs that are lurking, and then it's time to add a brand new feature.
+
+
+\section*{Bug 1}
+
+The intranet team have reported a bug with the batch job. Sometimes, the XML report comes back with \texttt{Infinity} as the saleperson's eco score. This month's sales team mileage claim looks like this:
+
+\begin{verbatim}
+    David Allen,130000,57
+    Lisa Crispin,27000,19
+    Ian Dees,0,22
+\end{verbatim}
+
+What do you think is going wrong?
+
+\answerbox{3}
+
+After some heated discussions between the sales team, the intranet team and the company's new Eco Tzar, it's decided that these zero mileage claims have been submitted in error, and so should be ignored in the calculation. So, for this month, Ian should not get a score on the eco report. 
+
+Write a test to demonstrate the bug (the test should fail) and then fix the bug (the test should now pass).
+
+\section*{Bug 2}
+
+The Eco Tzar has reviewed the end-to-end tests and has asked whether the system will cope with a salesperson that has visited more than one customer in a month. She's provided this example mileage claim:
+
+\begin{verbatim}
+    David Allen,130000,57
+    David Allen,2000,19
+\end{verbatim}
+
+What should the correct Eco Score be for David?
+
+Write a new test that uses the Eco Tzar's example. Now, use the new test to drive out a change to the code to implement the new requirement. Remember - you should see the new test fail before you try to implement the solution.
+
+\section*{A new feature}
+
+The Eco Tzar has decided that a prize will be awarded each month to the salesperson with the highest revenue-per-mile statistic. You've got to add functionality to the \texttt{\ShoutyReportJob} to support this requirement.
+
+
+\begin{sloppypar}
+\begin{itemize}
+    \item \texttt{\ShoutyReportJob} should be able to pass the calculated \texttt{\EcoStat}s back to \texttt{\ShoutyStatsService} by calling \texttt{\SetEcoStatsMethod()}
+    
+    \begin{itemize}
+        \item This should be optional - every run should create an XML report, but the user can request the call to \texttt{\SetEcoStatsMethod}
+    \end{itemize}
+
+
+    \item \texttt{\ShoutyReportJob} should be able to retrieve the name of the winning salesperson for any given month
+    
+    \begin{itemize}
+        \item When asked to retrieve the winning salesperson, \texttt{\ShoutyReportJob} should not read a mileage claims file nor generate an XML report
+    \end{itemize}\end{itemize}
+
+Take a look on page \pageref{service-spec} to see the documentation the \texttt{\ShoutyStatsService} team have given you. 
+\end{sloppypar}
+
+\QandAbox{Do you think there's enough information here?}{2}
+
+Ask your instructor for clarification if you need more.
+
+\vbox{
+\section*{Test driven cycle}
+
+Take the following approach:
+
+\begin{itemize}
+    
+    \item Start by analysing the stories and uncovering examples that document and challenge your understanding of the requirements
+
+    \item Pick the first example and write a test that expresses it
+    \begin{itemize}
+        \item Think about where in the pyramid it makes sense to write the test
+        
+        \item If the test introduces a collaboration with a service that has not been used before, then you'll need to create corresponding contract test(s)
+        
+        \item Don't try to get the example test to pass until you've got the contract tests passing
+        \begin{itemize}
+            \item \emph{Never refactor from red} -- prevent the failing collaboration test from running while you write the contract tests (see section below on \emph{Contract and collaboration tests}).
+        \end{itemize}
+    \end{itemize}
+
+    \item Go through your list of examples until your feature is complete
+\end{itemize}
+}
+
+\section*{How did that go?}
+
+\QandAbox{ Did you find any unexpected behaviour in \texttt{\ShoutyStatsService} when you were writing your contract tests?}{2}
+
+\section*{Contract and collaboration tests}
+
+In the GOOS mailing list, “Unit-test mock/stub assumptions rots”, 15 March 2012, J.B. Rainsberger described a disciplined approach to building trustworthy test doubles. He said we should ensure that:
+
+\begin{framed}
+\begin{itemize}
+    \item A stub in a collaboration test must correspond to an expected result in a contract test
+    \item An expectation in a collaboration test must correspond to an action in a contract test
+\end{itemize}
+
+This provides a \emph{systematic} way to check that [your code] remains in sync with the implementations of [the component you are mocking].
+    
+\end{framed}

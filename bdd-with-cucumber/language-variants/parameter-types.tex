@@ -1,0 +1,25 @@
+We saw how \CUKE{} captures certain parts of our steps and passes them as arguments to our step definitions. Output parameters declared as \texttt{\LEFTCURLY{}int\RIGHTCURLY{}} will be passed as integers. Output parameters declared as \texttt{\LEFTCURLY{}word\RIGHTCURLY{}} and \texttt{\LEFTCURLY{}string\RIGHTCURLY{}} will be passed as strings.
+
+Sometimes it's useful to be able to pass more meaningful arguments to our step definitions. This is easy with custom parameter types\JAVASCRIPT{\footnote{https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/api_reference.md}}. Let's try this out with our \texttt{Coordinate} class.
+
+Create a new \JAVASCRIPT{\CYBERDOJO{\texttt{features/parameter_types.js}}{\texttt{features/support/parameter_types.js}}}\RUBY{\texttt{features/support/parameter_types.rb}}\ file and add the following code:
+
+\JAVASCRIPT{\CYBERDOJO{\import{bdd-with-cucumber/language-variants/}{parameter-type-javascript-cyberdojo.tex}}{\import{bdd-with-cucumber/language-variants/}{parameter-type-javascript.tex}}}
+
+\RUBY{\import{bdd-with-cucumber/language-variants/}{parameter-type-ruby.tex}}
+
+We're using a regular expression to capture our location notation, and returning a new \texttt{Coordinate} object.
+
+Change your step definition from:
+
+\JAVASCRIPT{\import{bdd-with-cucumber/language-variants/}{stepdef-parameter-type-builtin-javascript.tex}}
+\RUBY{\import{bdd-with-cucumber/language-variants/}{stepdef-parameter-type-builtin-ruby.tex}}
+
+to:
+
+\JAVASCRIPT{\import{bdd-with-cucumber/language-variants/}{stepdef-parameter-type-custom-javascript.tex}}
+\RUBY{\import{bdd-with-cucumber/language-variants/}{stepdef-parameter-type-custom-ruby.tex}}
+
+Run \CUKE{} and all scenarios should still be green.
+
+\TRAINERNOTES{Ask room if they think a set of domain-specific parameter types could help the team establish a ubiquitous language. How?}

@@ -1,0 +1,60 @@
+\chapter*{What makes for good Gherkin?}
+
+\ifnotes
+
+    Alternative:
+    
+    \begin{itemize}
+        \item Draw a quadrant on the flip chart: Good/Bad vs Scenario1/Scenario2
+        \item Ask each table to come up with 1 good thing and 1 bad thing about each of the scenarios \& write them on 4 separate stickies
+        \item Put each sticky in the relevant quadrant
+        \item When done, your job is to explain why everything "Good" about Scenario 1 is in fact "Bad", and everything "Bad" about Scenario 2 is in fact "Good" 
+    \end{itemize}
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item Describe why inessential information is harmful
+        \item Explain why scenarios should be declarative
+        \item Reason why business folk like tabular data
+        \item Remember that implicit contexts are best omitted
+    \end{itemize}
+
+\fi
+
+\ifcontent
+
+    Read these two scenarios and underline terms that might be part of the team's ubiquitous language (remember that the ubiquitous language should be based on the business domain):
+
+\begin{verbatim}
+    Scenario: Dispense $50 cash in multiple denominations
+        Given I have $100 in my checking account
+        And I have a card with the PIN 5173
+        And I push my card into the machine
+        And I enter 5173 for my PIN
+        And I push the button next to “Withdrawal”
+        And I push the button next to “Checking”
+        When I push the button next to “$50”
+        Then a $20 bill should be ejected by the cash dispenser
+        And a $20 bill should be ejected by the cash dispenser
+        And a $10 bill should be ejected by the cash dispenser
+      
+    Scenario: Dispense $50 cash in multiple denominations
+        When $50 is dispensed by the ATM
+        Then the following bills should be dispensed:
+          | count | denomination |
+          | 2     | $20          |
+          | 1     | $10          |
+    
+\end{verbatim}
+
+    Discuss with your table group:
+    
+    \QandAbox{Both these scenarios describe the same behaviour. Which one do you think best expresses the essence of this behaviour from the business perspective?}{1.5}
+    
+    \QandAbox{What's good about each of them? What's bad about each of them?}{1.5}
+    
+    \QandAbox{If we were asked to change the system's UI, what effect would that have on these scenarios?
+    How might people in different roles see this differently? Why?}{1.5}
+
+\fi

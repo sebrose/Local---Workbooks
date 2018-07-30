@@ -1,0 +1,119 @@
+\documentclass[a4paper,12pt]{report} 
+
+\usepackage{cucumber-workbook}
+
+\title{BDD\\with\\\CUKE}
+
+\newcommand{\coverImage}{bdd-with-cucumber/images/cover.jpg}
+
+\newcommand{\CucumberWorkbookVersion}{4.5.3}
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one trainer conditional line below
+
+%\trainertrue
+\trainerfalse
+%-------------------------------------------------------
+
+\iftrainer
+    \newcommand{\targetAudience}{Trainer}
+    \contentfalse
+    \notestrue
+\else
+    \newcommand{\targetAudience}{Delegate}
+    \contenttrue
+    \notesfalse
+\fi
+
+
+%
+% If you need conditional content based on this variable,
+% check cucumber-workbook.sty for commands using \TARGETAUDIENCE
+%-------------------------------------------------------
+
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one language
+
+%\newcommand{\workbookLanguage}{Java}
+%\newcommand{\workbookLanguage}{C\char`\#}
+%\newcommand{\workbookLanguage}{JavaScript}
+\newcommand{\workbookLanguage}{Ruby}
+
+%
+% If you need conditional content based on this variable,
+% check cucumber-workbook.sty for commands using \LANGUAGE
+%-------------------------------------------------------
+
+
+%-------------------------------------------------------
+% What programming language is the workbook targeted at?
+% Uncomment ONLY one platform
+
+\newcommand{\targetPlatform}{CyberDojo}
+%\newcommand{\targetPlatform}{}
+
+
+%
+% If you need conditional content based on this variable,
+% check cucumber-workbook.sty for commands using \TARGETPLATFORM
+%-------------------------------------------------------
+
+%-------------------------------------------------------
+% What flavour of workbook should be produced?
+% Uncomment ONLY one flavour
+
+\newcommand{\workbookFlavour}{Standard}
+
+%
+% If you need conditional content based on this variable,
+% check cucumber-workbook.sty for commands using \FLAVOUR
+%-------------------------------------------------------
+
+
+\begin{document}
+
+\import{./}{cover.tex}
+\import{bdd-with-cucumber/}{introductory-notes-only.tex}
+
+\import{bdd-with-cucumber/}{lets-get-started.tex}
+\import{bdd-with-cucumber/}{what-is-cucumber-telling-us.tex}
+\import{bdd-with-cucumber/}{implement-coordinate.tex}
+\JAVASCRIPT {
+    \import{bdd-with-cucumber/}{stepdef-arguments-cucumber-expressions.tex}
+}
+\RUBY {
+    \import{bdd-with-cucumber/}{stepdef-arguments-cucumber-expressions.tex}
+}
+\JAVA {
+    \import{bdd-with-cucumber/}{stepdef-arguments-regular-expressions.tex}
+}
+\CSHARP {
+    \import{bdd-with-cucumber/}{stepdef-arguments-regular-expressions.tex}
+}
+\import{bdd-with-cucumber/}{multiple-shouters.tex}
+\import{bdd-with-cucumber/}{echoes.tex}
+\import{bdd-with-cucumber/}{scenario-outline.tex}
+\import{bdd-with-cucumber/}{data-tables.tex}
+\import{bdd-with-cucumber/}{multiple-shouts.tex}
+\import{bdd-with-cucumber/}{growing-your-specification.tex}
+\import{bdd-with-cucumber/}{sharing-state.tex}
+\import{bdd-with-cucumber/}{pyramid.tex}
+\import{bdd-with-cucumber/}{iceberg.tex}
+\import{bdd-with-cucumber/}{indirect-interfaces.tex}
+\import{bdd-with-cucumber/}{background.tex}
+\import{bdd-with-cucumber/}{hooks.tex}
+\import{bdd-with-cucumber/}{tags.tex}
+\import{bdd-with-cucumber/}{tagged-hooks.tex}
+\import{bdd-with-cucumber/}{transform.tex}
+\import{bdd-with-cucumber/}{cucumber-api.tex}
+\import{bdd-with-cucumber/}{extra-scenarios.tex}
+\JAVA {
+    \import{bdd-with-cucumber/}{running-cucumber.tex}
+}
+\NOTCSHARP {
+    \import{bdd-with-cucumber/}{cucumber-output.tex}
+}
+\end{document}

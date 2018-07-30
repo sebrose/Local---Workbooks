@@ -1,0 +1,10 @@
+\begin{verbatim}
+    const { setWorldConstructor } = require('cucumber')
+    const Shouty = require('../shouty')
+
+    function CustomWorld() {
+      this.shouty = new Shouty()
+    }
+
+    setWorldConstructor(CustomWorld)
+\end{verbatim}

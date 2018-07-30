@@ -1,0 +1,37 @@
+We saw how \CUKE{} will try to convert the string matched in a regular expression \emph{capture group} into an object of the type specified by the step definition. Let’s look at this more closely.
+
+\section*{StepArgumentTransformation}
+
+\CUKE{} is able to automatically convert captured parameters to built-in types, like \texttt{int} or \\ \texttt{DateTime}, but what about our \texttt{Coordinate} class?
+
+\begin{itemize}
+    \item Change the step definition:
+
+        \begin{verbatim}
+            
+        
+        [Given(@"(.*) is at (.*)")]
+        public void GivenLucyIsAt(string name, Coordinate coordinate)
+        {
+            shouty.SetLocation(name, coordinate);
+        }
+        \end{verbatim}
+
+\item Create a new method in the \texttt{LocationSteps} class, \texttt{ConvertCoordinate}, in the step definition folder, and annotate it with the \texttt{[StepArgumentTransformation]} attribute below:
+
+    \begin{verbatim}
+        [StepArgumentTransformation(@"(.*), (.*)")]
+        public Coordinate ConvertCoordinate(int xCoord, int yCoord)
+        {
+            return new Coordinate(xCoord, yCoord);
+        }
+        
+    \end{verbatim}
+\end{itemize}    
+
+Run \CUKE{}. All scenarios should still be green.
+
+
+You can now add different \texttt{StepArgumentTransformations} which will deal with place names rather than coordinates, e.g. North Pole is at \texttt{0, 0}.
+
+See if you can add the transformation and change Lucy's location to the North Pole.

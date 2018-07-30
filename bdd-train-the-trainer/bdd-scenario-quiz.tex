@@ -1,0 +1,68 @@
+\chapter*{Scenario rewriting}
+
+\ifnotes
+
+\fi
+
+\ifcontent
+
+    \QandAbox{1.	Phrase this in "Given, When, Then" format: "Robinson Crusoe" and" Treasure Island" are both classics. If I've got "Robinson Crusoe" in my basket and I go to the checkout, it should recommend "Treasure Island" to me too.}{3}
+    
+    \QandAbox{2.	Rephrase this scenario so that it doesn't make any reference to GUI elements. Bonus: What could you do that might help you avoid this kind of language? 
+    
+        \begin{adjustwidth}{1cm}{}
+            Given I clicked the buy button for "Robinson Crusoe" at \$12.95\\
+            And I'm on the "checkout" page\\
+            And postage is \$3.00\\
+            When I click "purchase"\\
+            Then I should see the text "Thank you! Your purchase is on its way!"\\
+            And I should see the text "Total cost: \$15.95"
+        \end{adjustwidth}
+        }{5}
+    
+
+    \QandAbox{3.	Refactor the event (When) so that the context (Given) is in its own step.
+    
+    \begin{adjustwidth}{1cm}{}
+        When Petunia Picky tells that she didn't like the "Early Grey Coffee" we sent her\\
+        Then we should skip it in her rotation.
+    \end{adjustwidth}
+    }{3}
+    
+    \QandAbox{4.	Refactor the event (When) and create two scenarios. Bonus: why wouldn't you automate both,  if the information you have below is all you've got?
+    
+    \begin{adjustwidth}{1cm}{}
+        Given customers who bought "Sparks" also bought "Speak for Yourself" and "Ellipse"\\
+        When Emma Excited buys "Sparks" or "Ellipse"\\
+        Then she should be recommended "Speak for Yourself" too.
+    \end{adjustwidth}
+    }{3}
+    
+    \QandAbox{5.	Refactor the events (When) so that there's only one of them.
+    
+    \begin{adjustwidth}{1cm}{}
+        Given my basket full of groceries has a total cost of \$23.58\\
+        When I say I've finished\\
+        And I choose to pay by credit card\\
+        And I enter my pin\\
+        And the payment is authorized\\
+        Then my credit card should be charged \$23.58\\
+        And I should get a receipt.
+    \end{adjustwidth}
+    }{3}
+    
+    \QandAbox{6.      Refactor the scenario below into the different capabilities of the system. 
+  
+    \begin{adjustwidth}{1cm}{}
+        Given I worked for Acme Ltd. for 4 days at \$300 a day\\
+        And I have a 30 day payment schedule\\
+        And the date is 22nd October 2014\\
+        And 22nd November 2014 is a Saturday\\
+        When I invoice Acme by email\\
+        Then Acme and I should both get copies of the email\\
+        And they should be given a due date of 24th November
+    \end{adjustwidth}
+    }{4}
+
+
+\fi

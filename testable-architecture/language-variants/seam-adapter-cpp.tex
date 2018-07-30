@@ -1,0 +1,41 @@
+\texttt{production_stats_service.hpp}
+
+\begin{verbatim}
+    #ifndef PRODUCTION_STATS_SERVICE
+    #define PRODUCTION_STATS_SERVICE
+    
+    #include "shouty_stats_service.hpp"
+    #include "stats_service.hpp"
+    #include <memory>
+    
+    class production_stats_service : public stats_service
+    {
+    public:
+        production_stats_service();
+        virtual double get_revenue(int customer_id) const;
+    
+    private:
+        std::unique_ptr<shouty_stats_service> stats_service;
+    };
+    
+    #endif
+
+\end{verbatim}
+
+\texttt{production_stats_service.cpp}
+
+\begin{verbatim}
+    #include "production_stats_service.hpp"
+    
+    production_stats_service::production_stats_service()
+    : stats_service(std::make_unique<shouty_stats_service>())
+    {
+    }
+    
+    double production_stats_service::get_revenue(int customer_id) const
+    {
+        // Hint: you can move code from shouty_report_processor.cpp to
+        // implement this method, including the behaviour to extract the
+        // revenue value as a double from the XML
+    }
+\end{verbatim}

@@ -1,0 +1,191 @@
+\ProvidesPackage{cucumber-workbook}
+
+\setlength\paperheight{11in}
+\addtolength\voffset{-8.8mm}
+
+\usepackage{epsfig}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{titlesec}
+\usepackage{varwidth}
+\usepackage{pdftexcmds}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{upquote}
+\usepackage{changepage}
+\usepackage[default]{lato}
+\usepackage[TS1,T1]{fontenc}
+
+\titleformat{\chapter}[display]
+    {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{0pt}{40pt}
+\titlespacing*{name=\chapter,numberless}{0pt}{-30pt}{10pt}
+
+\addtolength{\oddsidemargin}{-.75in}
+	\addtolength{\evensidemargin}{-.75in}
+	\addtolength{\textwidth}{1.5in}
+
+	\addtolength{\topmargin}{-.75in}
+	\addtolength{\textheight}{1.5in}
+	
+%========= Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancypagestyle{plain}{}
+\cfoot{\thepage}
+\rfoot{\raisebox{-2.8mm}{\includegraphics{cucumber-ltd-black-32}}}
+%==========
+
+\usepackage{import}
+
+\DeclareTextFontCommand{\emph}{\bfseries\itshape}
+
+\newcommand\CARET{\char`\^}
+\newcommand\PLUS{\char`\+}
+\newcommand\HASH{\char`\#}
+\newcommand\DOLLAR{\char`\$}
+\newcommand\BACKSLASH{\char`\\}
+\newcommand\DOUBLEBACKSLASH{\BACKSLASH\BACKSLASH}
+\newcommand\LEFTCURLY{\char`\{}
+\newcommand\RIGHTCURLY{\char`\}}
+
+% Common equivalents
+\newcommand{\CUKE}{\NOTCSHARP{Cucumber}\CSHARP{SpecFlow}}
+
+% DEPRECATED - use \QandAbox instead
+\newcommand{\answerbox}[1]{% Create an empty boxed area, of the specified height (in cm), that spans the page
+  \fbox{\begin{minipage}{\textwidth}\hfill\vspace{#1cm}\end{minipage}}
+  \vspace{0.5cm}}
+ 
+% Unless you really only want a box, use this command NOT \answerbox 
+\newcommand{\QandAbox}[2]{% Text followed by an empty boxed area, of the specified height (in cm), that spans the page
+  \begin{minipage}{\textwidth}
+  \vspace{0.2cm}
+  
+  {#1}
+  
+  \vspace{0.2cm}
+  
+  \answerbox{#2}
+  \end{minipage}}
+  
+
+\author{Cucumber Limited}
+\date{\today}
+
+% Code / typewriter font, but with hyphens.
+% DON'T USE THIS. USE \begin{sloppypar} INSTEAD
+\newcommand\textvtt[1]{{\normalfont\fontfamily{cmvtt}\selectfont #1}}
+
+% This make underscore a 'normal' letter, rather than something introducing a formula
+\catcode`\_11
+
+
+% ----- For watermarks  ------------
+% \usepackage{everypage}
+% \usepackage{draftwatermark}
+% \SetWatermarkText{FOR REVIEW}
+
+% ----- For conditional builds -------
+
+\usepackage{etoolbox}
+
+\makeatletter
+\newcommand{\LANGUAGE}[3]{%
+  \ifnum\pdf@strcmp{#1}{\workbookLanguage}=0 {#2}\else{#3}\fi\ignorespaces}
+\makeatother
+
+\newcommand{\JAVA}[1]{%
+  \LANGUAGE{Java}{#1}{} }
+\newcommand{\NOTJAVA}[1]{%
+  \LANGUAGE{Java}{}{#1} }
+
+\newcommand{\CPP}[1]{%
+  \LANGUAGE{C++}{#1}{} }
+\newcommand{\NOTCPP}[1]{%
+  \LANGUAGE{C++}{}{#1} }
+
+\newcommand{\CSHARP}[1]{%
+  \LANGUAGE{C\char`\#}{#1}{} }
+\newcommand{\NOTCSHARP}[1]{%
+  \LANGUAGE{C\char`\#}{}{#1} }
+  
+\newcommand{\JAVASCRIPT}[1]{%
+  \LANGUAGE{JavaScript}{#1}{} }
+\newcommand{\NOTJAVASCRIPT}[1]{%
+  \LANGUAGE{JavaScript}{}{#1} }
+
+\newcommand{\RUBY}[1]{%
+  \LANGUAGE{Ruby}{#1}{} }
+\newcommand{\NOTRUBY}[1]{%
+  \LANGUAGE{Ruby}{}{#1} }
+
+\makeatletter  
+\newcommand{\TRAINERNOTES}[1]{
+    {\color{red}
+        \ifnum\pdf@strcmp{Trainer}{\targetAudience}=0 
+            \begin{framed}
+                TRAINER'S NOTE:
+                
+                #1
+            \end{framed}
+        \fi\ignorespaces
+    }
+  }
+\makeatother
+
+% ============================================================
+% LaTeX conditionals for content type
+\newif\iftrainer
+
+\newif\ifcontent
+
+\newif\ifnotes
+
+% ============================================================
+
+\makeatletter
+\newcommand{\TARGETPLATFORM}[3]{%
+  \ifnum\pdf@strcmp{#1}{\targetPlatform}=0 #2\else#3\fi\ignorespaces}
+\makeatother
+  
+\newcommand{\CYBERDOJO}[2]{%
+  \TARGETPLATFORM{CyberDojo}{#1}{#2} }
+  
+\makeatletter
+\newcommand{\FLAVOUR}[3]{%
+  \ifnum\pdf@strcmp{#1}{\workbookFlavour}=0 #2\else#3\fi\ignorespaces}
+\makeatother
+  
+\newcommand{\VENDORPRODUCTTEAMS}[1]{%
+  \FLAVOUR{Vendor Product Teams}{#1}{} }
+
+\newcommand{\MAINFRAME}[1]{%
+  \FLAVOUR{Mainframe}{#1}{} }
+\newcommand{\NOTMAINFRAME}[1]{%
+  \FLAVOUR{Mainframe}{}{#1} }
+
+\newcommand{\PRODUCTOWNER}[1]{%
+  \FLAVOUR{Product Owner}{#1}{} }
+\newcommand{\NOTPRODUCTOWNER}[1]{%
+  \FLAVOUR{Product Owner}{}{#1} }
+
+\newcommand{\STANDARD}[1]{%
+  \FLAVOUR{Standard}{#1}{} }
+\newcommand{\NOTSTANDARD}[1]{%
+  \FLAVOUR{Standard}{}{#1} }
+  
+\newcommand{\IsForFlavour}[3]{{\forcsvlist{\listadd\workbookFlavours}{#1}\xifinlist{\workbookFlavour}{\workbookFlavours}{#2}{#3}}}
+  
+\newcommand{\IsForLanguage}[3]{{\forcsvlist{\listadd\workbookLanguages}{#1}\xifinlist{\workbookLanguage}{\workbookLanguages}{#2}{#3}}}
+%--------------------
+\newcommand{\workbookSubtitle}{A workbook for delegates}
+
+\newcommand{\titleFontSize}{3cm}

@@ -1,0 +1,27 @@
+\chapter*{Formulating our examples}
+
+The examples that we collect during our collaboration sessions are precise illustrations of how a rule should behave, but they're often not very readable. The team will take the examples that are interesting to the business and formulate them as business readable documentation using the a format called \emph{Gherkin}.
+
+We'll learn more about Gherkin shortly, but for now let's see how we could formulate the library example that we looked at earlier:
+
+\hspace*{1cm} \emph{Context}: Person has an adult library membership \\
+\hspace*{1cm} \emph{Action}: Reserves 1 book \\
+\hspace*{1cm} \emph{Outcome}: Should be charged \$1
+
+This could be formulated as:
+
+\hspace*{1cm} \emph{Given} Andrew has an adult membership \\
+\hspace*{1cm} \emph{When} he reserves a book \\
+\hspace*{1cm} \emph{Then} he should be charged \$1
+
+Each line of your formulated example must start with one of the following five keywords:
+
+\begin{itemize}
+    \item Given
+    \item When
+    \item Then
+    \item And
+    \item But
+\end{itemize}
+
+\QandAbox{Try formulating some of the examples we created earlier, during the \emph{Example Mapping} exercise:}{8}

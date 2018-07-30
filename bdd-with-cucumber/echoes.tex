@@ -1,0 +1,46 @@
+\chapter*{Another Scenario}
+
+\ifnotes
+
+    Learning outcomes:
+    
+    \begin{itemize}
+        \item Explain that for new functionality the failing acceptance test drives the evolution of the production code
+        \item Show that a new acceptance tests doesn't always lead to writing new step definitions
+        \item New rules need to be transcribed into the top of a feature file
+        \item Describe how "listening to your test" can lead to better implementation
+    \end{itemize}
+    
+    They start by FORMULATING a scenario. Then they automate it and see it fail. Then they need to get the code to pass. Ask if anyone wrote a unit test as part of getting to green. Ask them why they did/didn't write a unit test.
+    
+    Check if they have a step setting up a location for the shouter/listener. Should it be necessary?
+    
+    Answer: 
+    \begin{enumerate}
+        \item from a business perspective, NO.
+        \item from a technical perspective not if they check the shouter is not the listener before calculating the distance between the shouter and listener.
+    \end{enumerate}  
+    
+    \emph{We should not modify our scenarios/documentation to make the automation easier}
+    
+\fi 
+
+\ifcontent 
+    The product owner has come up with a new rule: "shouters should not hear their own shouts."  
+    
+    Write a scenario in the feature file that illustrates this rule.
+    
+    \QandAbox{Does your new scenario pass? What stage of the BDD process are we at now?}{2}
+    
+    \section*{Get to green}
+    
+    Depending on what scenario you wrote, you might now need to implement new step definition(s). 
+    
+    You will certainly need to modify your production code to make your new scenario pass. 
+    
+    Make sure you don't break any of the existing scenarios.
+    
+    \QandAbox{How long do you think the cycle of adding a new scenario and getting it to pass usually takes?}{2}
+    
+    \QandAbox{Does your new scenario have a \texttt{Given} step that specifies someone's location? Do you think that should be necessary?}{2}
+\fi

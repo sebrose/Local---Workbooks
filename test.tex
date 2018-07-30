@@ -1,0 +1,28 @@
+\documentclass[a4paper,12pt]{report} 
+
+\usepackage{pdftexcmds}
+
+\begin{document}
+
+CONTENT
+
+\newcommand{\workbookFlavour}{Standard}
+%\newcommand{\workbookFlavour}{NonStandard}
+
+\makeatletter
+\newcommand{\FLAVOUR}[3]{%
+  \ifnum\pdf@strcmp{#1}{\workbookFlavour}=0 #2 \else #3 \fi\ignorespaces}
+\makeatother
+  
+\newcommand{\STANDARD}[2]{%
+  \FLAVOUR{Standard}{#1}{#2} }
+  
+\begin{enumerate}
+\item One
+\STANDARD{\item Developers can’t test their own code.
+\item You can’t be truly agile unless you have clean code.
+\item You can’t have clean code unless you refactor.
+\item You can’t refactor without good automated tests.}{\item Two}
+\end{enumerate}
+
+\end{document}

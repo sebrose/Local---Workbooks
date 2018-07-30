@@ -1,0 +1,19 @@
+\begin{verbatim}
+    class mileage_claim_builder
+    {
+    public:
+        mileage_claim build()
+        {
+            return mileage_claim(..., ..., customer_id);
+        }
+    
+        mileage_claim_builder& with_customer_id(int id)
+        {
+            customer_id = id;
+            return *this;
+        }
+
+    private:
+        int customer_id;
+    }
+\end{verbatim}

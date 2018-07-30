@@ -1,0 +1,56 @@
+\chapter*{Builder pattern}
+
+The Builder pattern is generally useful for removing the responsibility for constructing an object from the part of the code that needs to use that object.
+
+\section*{Building test data}
+
+When used for generating test data, the builder will normally be able to construct a default object with little or no information. Imagine that your application included a \texttt{\CustomerRevenue} class - once you have created a builder for it, you could use it like this:
+
+\JAVA{\import{testable-architecture/language-variants/}{builder-revenue-java.tex}}
+\CSHARP{\import{testable-architecture/language-variants/}{builder-revenue-csharp.tex}}
+\CPP{\import{testable-architecture/language-variants/}{builder-revenue-cpp.tex}}
+
+
+Where some information is necessary to build a valid object, that is usually supplied through a \emph{fluent} API:
+
+\JAVA{\import{testable-architecture/language-variants/}{builder-fluent-java.tex}}
+\CSHARP{\import{testable-architecture/language-variants/}{builder-fluent-csharp.tex}}
+\CPP{\import{testable-architecture/language-variants/}{builder-fluent-cpp.tex}}
+
+The benefit of letting the builder generate arbitrary values for most fields in the object that it is building is that your tests only have to concern themselves with the values that are actually significant to the behaviour that the test is documenting. This makes the test much easier to read, understand and maintain.
+
+A further benefit is that if the way the object is constructed changes, the only place you'll need to fix your test code is in the builder.
+
+\section*{Fluent API}
+
+\vbox{
+To construct a fluent API is simple - just make sure that the methods that make up the language of the API return a reference to the builder itself:
+
+\JAVA{\import{testable-architecture/language-variants/}{builder-example-java.tex}}
+\CSHARP{\import{testable-architecture/language-variants/}{builder-example-csharp.tex}}
+\CPP{\import{testable-architecture/language-variants/}{builder-example-cpp.tex}}
+}
+
+\section*{Apply the pattern}
+
+Refactor the unit test that you've just created to use these builders:
+
+\begin{itemize}
+    \item \texttt{FakeRevenueProviderBuilder}
+    \item \texttt{MileageClaimCollectionBuilder}
+    \item \texttt{EcoStatCollectionBuilder}
+\end{itemize}
+
+\QandAbox{How much more readable is it now?}{2}
+
+
+\section*{End to end tests}
+
+You've pushed one of our end-to-end tests down into the unit tests, but we still have one end-to-end test left.
+
+\QandAbox{What is the purpose of an end-to-end test (at the top of the pyramid)?}{2.5}
+
+\QandAbox{Should the remaining end-to-end test be pushed down the pyramid?}{2.5}
+
+\QandAbox{Do we have any tests that correspond to the middle of the pyramid? What would they look like?}{2.5}
+

@@ -1,0 +1,40 @@
+\chapter*{What makes for good Gherkin?}
+
+Read these two scenarios and underline terms that might be part of the team's ubiquitous language (remember that the ubiquitous language should be based on the business domain):
+
+\begin{verbatim}
+    Scenario: Dispense cash in multiple denominations
+        Given I have $100 in my account
+        And I have a card with the PIN 5173
+        And I push my card into the machine
+        And I enter 5173 for my PIN
+        And I push the button next to “Withdrawal”
+        And I push the button next to “Checking”
+        When I push the button next to “$50”
+        Then a $20 bill should be ejected by the cash dispenser
+        And a $20 bill should be ejected by the cash dispenser
+        And a $10 bill should be ejected by the cash dispenser
+      
+    Scenario: Dispense cash in multiple denominations
+        When $50 is dispensed by the ATM
+        Then the following bills should be received:
+          | count | denomination |
+          | 2     | $20          |
+          | 1     | $10          |
+    
+\end{verbatim}
+
+Discuss with your table group:
+
+Both these scenarios describe the same behaviour. Which one do you think best expresses the essence of this behaviour from the business perspective?
+
+\answerbox{1.5}
+
+What's good about each of them? What's bad about each of them?
+
+\answerbox{1.5}
+
+If we were asked to change the system's UI, what effect would that have on these scenarios?
+How might people in different roles see this differently? Why?
+
+\answerbox{1.5}

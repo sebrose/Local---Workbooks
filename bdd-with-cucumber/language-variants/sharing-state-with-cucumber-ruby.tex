@@ -1,0 +1,5 @@
+In some situations we need a way to share state between our step definitions while at the same time maintaining isolation between our scenarios. \CUKE{} lets you do this simply by assigning values to instance variables.
+
+The \texttt{Before} hook\footnote{We'll learn more about hooks soon} is already assigining the instance variable \texttt{@shouty}, and this is available in all of the step definitions, including step definitions in other files.
+
+These instance variables are assigned to a new \texttt{World} instance, and Cucumber creates a new instance of \texttt{World} before each scenario is executed. This ensures that any shared variables are created fresh for each scenario.

@@ -1,0 +1,125 @@
+\chapter*{Tags}
+
+\ifnotes
+
+    Learning outcomes:
+
+    \begin{enumerate}
+        \item Add a \texttt{@wip} tag to one of the scenarios
+\CYBERDOJO{
+        \item Modify the \texttt{java} invocation in \texttt{cyber-dojo.sh} so that the start of the line looks like: \\
+        \texttt{java  -Dcucumber.options="-{}-tags @wip" -cp \$CLASSES }
+        \item Press the \emph{TEST} button
+}{
+        \item Open a command line for you project
+        \item Type \texttt{mvn test -Dcucumber.options="-{}-tags @wip"} at the command line, and press enter
+}
+        \item Cucumber will now only execute the scenario you tagged as \texttt{@wip}
+    \end{enumerate}
+
+
+\fi
+
+\ifcontent
+    \CUKE{} allows you to add free-text \emph{tags} to your features, scenarios, scenario outlines and example tables (see \emph{Scenario Outline} sections):
+
+    \begin{itemize}
+        \item tags are an '@' character followed by some text (without any white space)
+        \item tags applied to a feature apply to every scenario in that feature
+        \item tags are case sensitive
+        \item you can apply as many tags to a feature/scenario as you wish
+    \end{itemize}
+
+    \JAVA{
+        You can then tell \CUKE{} which scenarios you want to run by supplying a \emph{tag expression} at runtime - either on the command line or via the \texttt{@CucumberOptions} Java annotation. Tag expressions are boolean and offer the logical operations \emph{and}, \emph{or} and \emph{not}.
+
+        Let's use a tag to just run a single "Work in Progress" scenario.
+
+        \begin{enumerate}
+            \item Add a \texttt{@wip} tag to one of the scenarios
+            \CYBERDOJO{
+                    \item Modify the \texttt{@CucumberOptions} annotation in \texttt{RunCukesTest.java} so that it begins like: \\
+                    \texttt{@CucumberOptions(tags=\{"@wip"\}, strict=true, ... )}
+            }{
+                    \item Open a command line for you project
+                    \item Type \texttt{cucumber -{}-tags @wip} at the command line, and press enter
+            }
+            \item Cucumber will now only execute the scenario you tagged as \texttt{@wip}
+        \end{enumerate}
+    }
+
+    \RUBY{
+        You can then tell \CUKE{} which scenarios you want to run by supplying a \emph{tag expression} at runtime - either on the command line or via \emph{@CucumberOptions}. Tag expressions are boolean and offer the logical operations \emph{and}, \emph{or} and \emph{not}.
+
+        Let's use a tag to just run a single "Work in Progress" scenario.
+
+        \begin{enumerate}
+            \item Add a \texttt{@wip} tag to one of the scenarios
+            \item Open a command line for you project
+            \item Type \texttt{cucumber -{}-tags @wip} at the command line, and press enter
+            \item Cucumber will now only execute the scenario you tagged as \texttt{@wip}
+        \end{enumerate}
+    }
+
+    \JAVASCRIPT{
+        You can then tell \CUKE{} which scenarios you want to run by supplying a \emph{tag expression} at runtime. Tag expressions are boolean expressions and offer the logical operations \emph{and}, \emph{or} and \emph{not}.
+
+        Let's use a tag to just run a single “Work in Progress” scenario.
+
+        \begin{enumerate}
+            \item Add a \texttt{@wip} tag to one of the scenarios
+        \CYBERDOJO{
+                \item Add the following line to the \texttt{cucumber} invocation in \texttt{cyber-dojo.sh} :\\
+                \texttt{-{}-tags @wip \textbackslash }
+                \item Press the \emph{TEST} button
+        }
+        {        \item Open a command line for you project
+                \item Type \texttt{cucumber -{}-tags @wip} at the command line, and press enter. \\
+                Note: You can also run \texttt{npm test -{}- -{}-tags @wip}
+        }
+            \item \CUKE{} will now only execute the scenario you tagged as \texttt{@wip}
+        \end{enumerate}
+
+        \section*{Logical tag expressions}
+        In some cases, you may want to run scenarios that have different tag names such as:
+
+        \hspace*{1cm}\texttt{@ShoutHeard} \\
+        \hspace*{1cm}\texttt{Scenario: In range shout is heard} \\
+        \hspace*{1cm}\texttt{...}
+
+        \hspace*{1cm}\texttt{@ShoutNotHeard} \\
+        \hspace*{1cm}\texttt{Scenario: Out of range shout is not heard} \\
+        \hspace*{1cm}\texttt{...}
+
+        \CYBERDOJO{
+            Modify \texttt{cyber-dojo.sh} so that the invocation of \CUKE{} starts off like this:
+
+            \hspace*{1cm}\texttt{./cucumber.js} \\
+            \hspace*{2cm}\texttt{-{}-tags "@ShoutHeard or @ShoutNotHeard" \textbackslash}
+            }
+            {
+            \hspace*{1cm}\texttt{npm test -{}- -{}-tags "@ShoutHeard or @ShoutNotHeard"}
+            }
+    }
+
+    \CSHARP{
+        \CUKE{} converts the tags into "Traits" or "Categories" which you can use to selectively run scenarios in your test-runner.
+
+        \CYBERDOJO{}{Lets use the VisualStudio Test Explorer window to just run a single "Work in Progress" scenario.}
+
+        \begin{enumerate}
+            \item Add a \texttt{@wip} tag to one of the scenarios
+            \item Run \CUKE{} to confirm all scenarios are still green
+        \CYBERDOJO{
+                \item Modify the \texttt{mono} invocation at the bottom of \texttt{cyber-dojo.sh} so that the start of the line looks like: \\
+                \texttt{mono \${NUNIT_RUNNERS_PATH}/nunit3-console.exe  --where "cat==wip" --noheader }
+                \item Press the \emph{TEST} button
+        }
+        {
+                \item Open the Test Explorer window
+                \item Type \texttt{Trait:wip} in to the Search text box, and press enter
+                \item 'Run all' will now only execute the scenario you tagged as \texttt{@wip}
+        }
+        \end{enumerate}
+    }
+\fi

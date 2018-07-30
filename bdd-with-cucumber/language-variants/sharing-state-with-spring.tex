@@ -1,0 +1,75 @@
+We need some way to share state between our step definition classes, while at the same time maintaining isolation between our scenarios. \CUKE{} encourages you to do this by using a Dependency Injection (DI) container. \CUKE{} doesn't have its own DI container, but it ships with linkages to several common containers, including Spring.
+
+The problem you encountered when splitting the existing step definitions between 2 classes was sharing the Shouty instance. We can use Spring to solve this problem:
+
+%     <bean class="Shouty" autowire-candidate="true" scope="cucumber-glue" />
+
+
+\begin{itemize}
+    \CYBERDOJO
+        {}
+        {\item Annotate the \texttt{Shouty} class with \texttt{@Component}}
+    \item For the \texttt{Shouty} instance field in \underline{both} step definition classes 
+    \begin{enumerate}
+        \item Annotate with \texttt{@Autowired}
+        \item Modify the line following the annotation to read: \texttt{private Shouty shouty;}
+    \end{enumerate}
+\end{itemize}
+
+These annotations give the responsibility for managing the \texttt{Shouty} instance to Spring. By default Spring will create a single instance of \texttt{Shouty} and inject it where-ever requested.
+
+Run \CUKE{}. What happens? Why?
+
+\answerbox{1}
+
+
+\section*{Isolation}
+
+Before we started using Spring we created the \texttt{Shouty} instance explicitly in the step definition class. As described in the \CUKE{} Lifecycle section, \CUKE{} deletes all step definition classes before each scenario runs. This meant that we got a fresh \texttt{Shouty} object for each scenario.
+
+Now we have delegated management of the \texttt{Shouty} object to Spring, and it doesn't know about \CUKE{} and scenarios. Spring creates a singleton \texttt{Shouty} object and reuses it for each scenario, which is allowing state to leak. We need to tell Spring to create a new \texttt{Shouty} object for each Scenario:
+
+\CYBERDOJO
+{
+    \begin{itemize}
+        \item Change the \texttt{bean} element in \texttt{cucumber.xml} to read:
+        
+        \texttt{<bean class="Shouty" autowire-candidate="true" scope="cucumber-glue" />}
+    \end{itemize}
+
+    We have modified the Spring configuration to associate autowired \texttt{Shouty} objects with the \\ \texttt{cucumber-glue} scope. The Cucumber-Spring integration defines the \texttt{cucumber-glue} scope and uses it to reset state before each scenario.
+}
+{
+    \begin{itemize}
+        \item Annotate the \texttt{Shouty} class with \texttt{@Scope("cucumber-glue")}
+    \end{itemize}
+
+    This is a Spring annotation, but the Cucumber-Spring integration defines the \texttt{cucumber-glue} scope and uses it to reset state before each scenario.
+}
+
+
+Once you have modified the code, run \CUKE{} again. All scenarios should now pass.
+
+% REMOVE THIS CHAPTER
+
+\chapter*{Another level of indirection}
+
+You may have noticed that we added annotations to the \texttt{Shouty} object, which is our production code. Obviously we can't modify production code just to help our test code, so we'll need another solution.
+
+There's a famous computer science quote by David Wheeler, which says:
+
+\setlength{\leftskip}{1cm}
+
+    \textit{"All problems in computer science can be solved by \textbf{another level of indirection}"}
+
+\setlength{\leftskip}{0pt}
+
+And that's just what we're going to do here. 
+\begin{enumerate}
+    \item Remove the \texttt{@Component} and \texttt{@Scope} annotations from \texttt{Shouty}
+    \item Create a \texttt{ShoutyHelper} class in the step definition folder that \texttt{extends} \texttt{Shouty}
+    \item Annotate \texttt{ShoutyHelper} with \texttt{@Component} and \texttt{@Scope("cucumber-glue")}
+    \item Replace direct references to \texttt{Shouty} in the step definition classes with references to\\ \texttt{ShoutyHelper}
+\end{enumerate}
+
+Run \CUKE{} again. All scenarios should still be passing.

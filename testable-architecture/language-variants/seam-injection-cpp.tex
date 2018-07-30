@@ -1,0 +1,9 @@
+\begin{verbatim}
+    shouty_report_processor::shouty_report_processor(
+        const std::vector<mileage_claim> & claims,
+        std::unique_ptr<revenue_provider> && the_revenue_provider)
+    : claims_(claims)
+    , revenue_provider_(std::move(the_revenue_provider))
+    {
+}
+\end{verbatim}
